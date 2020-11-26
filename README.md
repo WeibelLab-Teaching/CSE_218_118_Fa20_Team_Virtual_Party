@@ -1,6 +1,6 @@
 # CSE 218/118 FA20 Team Virtual Party
 ## How to Run the App
-First, navigate to the folder `code` in a terminal. Then type in `node server.js` to host the server locally.
+First, navigate to the folder `server` in a terminal. Then type in `node server.js` to host the server locally.
 
 Then install the **Live Server** extention by Ritwick Dey in VSCode.
 
