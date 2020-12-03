@@ -63,7 +63,7 @@ class Avatar {
 }
 
 Avatar.absoluteRotation = 0;
-Avatar.height = 20;
+Avatar.height = 30;
 Avatar.width = 10
 Avatar.depth = 10
 Avatar.mesh = null;
