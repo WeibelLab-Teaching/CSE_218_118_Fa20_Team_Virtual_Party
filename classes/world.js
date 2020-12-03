@@ -90,8 +90,8 @@ class World {
     }
     
     static setupLights() {
-        var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0.5), World.scene);
-        light.intensity = 0.5;        
+        var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), World.scene);
+        light.intensity = 0.7;        
     }
 
     static addMesh() {
