@@ -26,8 +26,8 @@ class Billboard {
         this.text.fontWeight = "bold";
         this.text.color = "white";
         this.text.outlineColor = "black";
-        this.text.outlineWidth = 4;
-        this.text.fontSize = 90;
+        this.text.outlineWidth = 10;
+        this.text.fontSize = 150;
         containerUI.addControl(this.text);
         this.text.text = this.username;
         this.mesh.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
@@ -35,5 +35,5 @@ class Billboard {
     }
 }
 
-Billboard.height = 0.1;
-Billboard.width = 0.3;
+Billboard.height = 5;
+Billboard.width = 10;

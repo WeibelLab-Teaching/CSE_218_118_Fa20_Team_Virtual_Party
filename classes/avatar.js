@@ -6,7 +6,7 @@
 class Avatar {
     
     static init() {
-        Avatar.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: Avatar.height, width: 0.1, depth: 0.1}, World.scene);
+        Avatar.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: Avatar.height, width: 10, depth: 10}, World.scene);
         Avatar.mesh.position = BABYLON.Vector3.Zero();
         Avatar.mesh.position.y = Avatar.height/2;
         Avatar.mesh.material = new BABYLON.StandardMaterial("matAvatar", World.scene);
@@ -64,6 +64,8 @@ class Avatar {
 
 Avatar.absoluteRotation = 0;
 Avatar.height = 20;
+Avatar.width = 10
+Avatar.depth = 10
 Avatar.mesh = null;
-Avatar.rotationSpeed = 0.01;
+Avatar.rotationSpeed = 0.02;
 Avatar.walkSpeed = .75;

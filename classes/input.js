@@ -24,8 +24,8 @@ class Input {
             case 40: // arrow down
                 Input.key.down = true;
                 break;
-            
         }
+        
     }
     
     static keyupEvent(e) {
@@ -46,7 +46,6 @@ class Input {
             case 40: // arrow down
                 Input.key.down = false;
                 break;
-            
         }
     }
 }
