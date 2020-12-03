@@ -4,9 +4,9 @@
 class Player {
     
     constructor(id, username) {
-        var height = 0.3;
+        var height = 20;
         this.id = id;
-        this.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: height, width: 0.1, depth: 0.1}, World.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: Avatar.height, width: Avatar.width, depth: Avatar.depth}, World.scene);
         this.mesh.position = BABYLON.Vector3.Zero();
         this.mesh.position.x = 0;
         this.mesh.position.y = height/2;

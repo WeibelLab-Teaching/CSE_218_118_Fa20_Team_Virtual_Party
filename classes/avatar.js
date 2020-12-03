@@ -6,7 +6,7 @@
 class Avatar {
     
     static init() {
-        Avatar.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: Avatar.height, width: 0.1, depth: 0.1}, World.scene);
+        Avatar.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: Avatar.height, width: 10, depth: 10}, World.scene);
         Avatar.mesh.position = BABYLON.Vector3.Zero();
         Avatar.mesh.position.y = Avatar.height/2;
         Avatar.mesh.material = new BABYLON.StandardMaterial("matAvatar", World.scene);
@@ -43,6 +43,12 @@ class Avatar {
 		Avatar.mesh.moveWithCollisions(forward);
                 Avatar.send();
             }
+            //Moving backward
+            else if (Input.key.down) {
+                var backward = new BABYLON.Vector3(-Avatar.walkSpeed * Math.cos(Avatar.absoluteRotation), 0, -Avatar.walkSpeed * Math.sin(Avatar.absoluteRotation));
+                Avatar.mesh.moveWithCollisions(backward);
+                        Avatar.send();
+            }
             //Turning left
             if (Input.key.left) {
                 Avatar.rotate(false);
@@ -57,7 +63,9 @@ class Avatar {
 }
 
 Avatar.absoluteRotation = 0;
-Avatar.height = 1;
+Avatar.height = 30;
+Avatar.width = 10
+Avatar.depth = 10
 Avatar.mesh = null;
-Avatar.rotationSpeed = 0.01;
-Avatar.walkSpeed = 0.07;
+Avatar.rotationSpeed = 0.02;
+Avatar.walkSpeed = .75;

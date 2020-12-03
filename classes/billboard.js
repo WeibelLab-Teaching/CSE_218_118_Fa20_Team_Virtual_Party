@@ -18,16 +18,16 @@ class Billboard {
         advancedTexture.name = "AvatarBillboard";
         var containerUI = new BABYLON.GUI.Rectangle("container");
         containerUI.thickness = 0;
-        containerUI.height = "100px";
-        containerUI.width = "800px";
+        containerUI.height = "400px";
+        containerUI.width = "1000px";
         advancedTexture.addControl(containerUI);
         this.text = new BABYLON.GUI.TextBlock();
         this.text.fontFamily = "Arial";
         this.text.fontWeight = "bold";
-        this.text.color = "white";
-        this.text.outlineColor = "black";
-        this.text.outlineWidth = 4;
-        this.text.fontSize = 90;
+        this.text.color = "black";
+        this.text.outlineColor = "white";
+        this.text.outlineWidth = 10;
+        this.text.fontSize = 250;
         containerUI.addControl(this.text);
         this.text.text = this.username;
         this.mesh.billboardMode = BABYLON.Mesh.BILLBOARDMODE_ALL;
@@ -35,5 +35,5 @@ class Billboard {
     }
 }
 
-Billboard.height = 0.1;
-Billboard.width = 0.3;
+Billboard.height = 5;
+Billboard.width = 15;

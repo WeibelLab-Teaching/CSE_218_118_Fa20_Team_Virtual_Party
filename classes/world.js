@@ -29,7 +29,7 @@ class World {
     }
     
     static setupCamera() {
-        World.camera = new BABYLON.FreeCamera("thirdPersonCam", BABYLON.Vector3.Zero(), World.scene);
+        World.camera = new BABYLON.FreeCamera("firstPersonCam", BABYLON.Vector3.Zero(), World.scene);
         World.camera.position.x -= Math.sin(-Math.PI/2) * -1 * World.cameraDistance;
         World.camera.position.y = Avatar.height + Avatar.height/2;
         World.camera.position.z -= Math.cos(-Math.PI/2) * -1 * World.cameraDistance;
@@ -39,9 +39,9 @@ class World {
         World.scene.activeCameras.push(World.camera);
 
         // For testing purpose
-        // var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
-        // camera.attachControl(World.canvas, true);
-        // camera.minZ = 0.1;
+        //var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
+        //camera.attachControl(World.canvas, true);
+        //camera.minZ = 0.1;
     }
     
     static setupGround() {
@@ -152,16 +152,16 @@ class World {
     }
 
     static updateCamera() {
-        if (Avatar.mesh !== null) {
-            World.camera.position.x = Avatar.mesh.position.x;
-            World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
-            World.camera.position.z = Avatar.mesh.position.z;
-            World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-            World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-            var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
-            World.camera.setTarget(lookAt);
-        }
-    }
+         if (Avatar.mesh !== null) {
+             World.camera.position.x = Avatar.mesh.position.x;
+             World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
+             World.camera.position.z = Avatar.mesh.position.z;
+             World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+             World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+             var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
+             World.camera.setTarget(lookAt);
+         }
+     }
 }
 
-World.cameraDistance = 1.5;
+World.cameraDistance = .1;
