@@ -56,7 +56,7 @@ class World {
             'h' : 5,
             'w' : 5
         };
-        var tiledGround = new BABYLON.MeshBuilder.CreateTiledGround("tiledGround", {xmin: -500, zmin: -500, xmax: 500, zmax: 500, subdivisions: grid});
+        var tiledGround = new BABYLON.MeshBuilder.CreateTiledGround("tiledGround", {xmin: -250, zmin: -250, xmax: 250, zmax: 250, subdivisions: grid});
         var material = new BABYLON.StandardMaterial("matGround", World.scene);
         material.diffuseTexture = new BABYLON.Texture("assets/images/worn_white_floor.jpg", World.scene);  
         const multimat = new BABYLON.MultiMaterial("multi", World.scene);
@@ -81,7 +81,7 @@ class World {
     }
 
     static setupSkybox() {
-        var skybox = BABYLON.MeshBuilder.CreateBox("SkyBox", {size:1000.0}, World.scene);
+        var skybox = BABYLON.MeshBuilder.CreateBox("SkyBox", {size:500.0}, World.scene);
         var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", World.scene);
         skyboxMaterial.backFaceCulling = false;
         skyboxMaterial.reflectionTexture = new BABYLON.HDRCubeTexture("assets/images/Barce_Rooftop_C_3k.hdr", World.scene, 768);
@@ -95,7 +95,60 @@ class World {
     }
 
     static addMesh() {
-        BABYLON.SceneLoader.Append('./', 'untitled.gltf', World.scene, function(scene){});
+        var i = 0;
+        var table_nums = 6;
+        var dz = [0, 200, 0, 200, 0, 200];
+        var dx = [0, 0, 100, 100, 200, 200];
+
+        // Import 6 table
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[i], 0, -100 + dz[i]);
+
+            // for (i = 1; i < table_nums; i++) {			
+            //     meshes.forEach(function (m) {
+            //         var clone = m.clone("newname");
+            //         clone.position.x += dx[i];
+            //         clone.position.z += dz[i];
+            //     });
+            // }
+        });
+        
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[1], 0, -100 + dz[1]);
+        });
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[2], 0, -100 + dz[2]);
+        });
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[3], 0, -100 + dz[3]);
+        });
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[4], 0, -100 + dz[4]);
+        });
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[5], 0, -100 + dz[5]);
+        });
+
+        // Import Bar Table
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/bar_table.glb', World.scene, function(meshes){
+            var bar_table = meshes[0];
+            bar_table.scaling = new BABYLON.Vector3(3.5, 3.5, 3.5);
+            bar_table.rotate(BABYLON.Axis.Y, Math.PI / 2, World.scene);
+            bar_table.position = new BABYLON.Vector3(-220, 0, 0);
+        });
+
     }
 
     static updateCamera() {
