@@ -19,7 +19,7 @@ class World {
         engine.runRenderLoop(() => {
             World.scene.render();
             Avatar.update();
-            // World.updateCamera();
+            World.updateCamera();
         });        
         
         //Resize event
@@ -29,19 +29,19 @@ class World {
     }
     
     static setupCamera() {
-        // World.camera = new BABYLON.FreeCamera("thirdPersonCam", BABYLON.Vector3.Zero(), World.scene);
-        // World.camera.position.x -= Math.sin(-Math.PI/2) * -1 * World.cameraDistance;
-        // World.camera.position.y = Avatar.height + Avatar.height/2;
-        // World.camera.position.z -= Math.cos(-Math.PI/2) * -1 * World.cameraDistance;
-        // var lookAt = BABYLON.Vector3.Zero();
-        // lookAt.y = Avatar.height + Avatar.height/2;
-        // World.camera.setTarget(lookAt);
-        // World.scene.activeCameras.push(World.camera);
+        World.camera = new BABYLON.FreeCamera("thirdPersonCam", BABYLON.Vector3.Zero(), World.scene);
+        World.camera.position.x -= Math.sin(-Math.PI/2) * -1 * World.cameraDistance;
+        World.camera.position.y = Avatar.height + Avatar.height/2;
+        World.camera.position.z -= Math.cos(-Math.PI/2) * -1 * World.cameraDistance;
+        var lookAt = BABYLON.Vector3.Zero();
+        lookAt.y = Avatar.height + Avatar.height/2;
+        World.camera.setTarget(lookAt);
+        World.scene.activeCameras.push(World.camera);
 
         // For testing purpose
-        var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
-        camera.attachControl(World.canvas, true);
-        camera.minZ = 0.1;
+        // var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
+        // camera.attachControl(World.canvas, true);
+        // camera.minZ = 0.1;
     }
     
     static setupGround() {
@@ -95,24 +95,73 @@ class World {
     }
 
     static addMesh() {
-        BABYLON.SceneLoader.ImportMesh(null, './', 'untitled.gltf', World.scene, function(meshes){
+        var i = 0;
+        var table_nums = 6;
+        var dz = [0, 200, 0, 200, 0, 200];
+        var dx = [0, 0, 100, 100, 200, 200];
+
+        // Import 6 table
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
             var table = meshes[0];
             table.scaling = new BABYLON.Vector3(5, 5, 5);
-            table.position = new BABYLON.Vector3(0, 0, 0);
+            table.position = new BABYLON.Vector3(-100 + dx[i], 0, -100 + dz[i]);
+
+            // for (i = 1; i < table_nums; i++) {			
+            //     meshes.forEach(function (m) {
+            //         var clone = m.clone("newname");
+            //         clone.position.x += dx[i];
+            //         clone.position.z += dz[i];
+            //     });
+            // }
         });
+        
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[1], 0, -100 + dz[1]);
+        });
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[2], 0, -100 + dz[2]);
+        });
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[3], 0, -100 + dz[3]);
+        });
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[4], 0, -100 + dz[4]);
+        });
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[5], 0, -100 + dz[5]);
+        });
+
+        // Import Bar Table
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/bar_table.glb', World.scene, function(meshes){
+            var bar_table = meshes[0];
+            bar_table.scaling = new BABYLON.Vector3(3.5, 3.5, 3.5);
+            bar_table.rotate(BABYLON.Axis.Y, Math.PI / 2, World.scene);
+            bar_table.position = new BABYLON.Vector3(-220, 0, 0);
+        });
+
     }
 
-    // static updateCamera() {
-    //     if (Avatar.mesh !== null) {
-    //         World.camera.position.x = Avatar.mesh.position.x;
-    //         World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
-    //         World.camera.position.z = Avatar.mesh.position.z;
-    //         World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-    //         World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-    //         var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
-    //         World.camera.setTarget(lookAt);
-    //     }
-    // }
+    static updateCamera() {
+        if (Avatar.mesh !== null) {
+            World.camera.position.x = Avatar.mesh.position.x;
+            World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
+            World.camera.position.z = Avatar.mesh.position.z;
+            World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+            World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+            var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
+            World.camera.setTarget(lookAt);
+        }
+    }
 }
 
 World.cameraDistance = 1.5;
