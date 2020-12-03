@@ -34,7 +34,10 @@
 	<body>
 		<h1>Multiplayer Game</h1>
 		<span>Username: </span><input type="text" id="username">&nbsp;&nbsp;
-		<button id="login" onclick="UI.login()">Log-in</button>
+		<button id="login" onclick='UI.login();
+		document.getElementById("canvas").style.top = "0px"
+		document.getElementById("canvas").style.height = "calc(100%)"
+		'>Log-in</button>
 		<canvas id="canvas"></canvas>
 	</body>
 	<script src="client.js"></script>

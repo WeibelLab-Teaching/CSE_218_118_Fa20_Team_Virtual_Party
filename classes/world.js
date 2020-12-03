@@ -39,9 +39,15 @@ class World {
         World.scene.activeCameras.push(World.camera);
 
         // For testing purpose
+<<<<<<< HEAD
         // var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
         // camera.attachControl(World.canvas, true);
         // camera.minZ = 0.1;
+=======
+        //var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
+        //camera.attachControl(World.canvas, true);
+        //camera.minZ = 0.1;
+>>>>>>> 1b66c66... Enabled First Person View, Updated Login UI, Adjusted avatar speed
     }
     
     static setupGround() {
@@ -152,6 +158,7 @@ class World {
     }
 
     static updateCamera() {
+<<<<<<< HEAD
         if (Avatar.mesh !== null) {
             World.camera.position.x = Avatar.mesh.position.x;
             World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
@@ -162,6 +169,18 @@ class World {
             World.camera.setTarget(lookAt);
         }
     }
+=======
+         if (Avatar.mesh !== null) {
+             World.camera.position.x = Avatar.mesh.position.x;
+             World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
+             World.camera.position.z = Avatar.mesh.position.z;
+             World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+             World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+             var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
+             World.camera.setTarget(lookAt);
+         }
+     }
+>>>>>>> 1b66c66... Enabled First Person View, Updated Login UI, Adjusted avatar speed
 }
 
-World.cameraDistance = 1.5;
+World.cameraDistance = .1;

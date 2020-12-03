@@ -43,6 +43,12 @@ class Avatar {
 		Avatar.mesh.moveWithCollisions(forward);
                 Avatar.send();
             }
+            //Moving backward
+            else if (Input.key.down) {
+                var backward = new BABYLON.Vector3(-Avatar.walkSpeed * Math.cos(Avatar.absoluteRotation), 0, -Avatar.walkSpeed * Math.sin(Avatar.absoluteRotation));
+                Avatar.mesh.moveWithCollisions(backward);
+                        Avatar.send();
+            }
             //Turning left
             if (Input.key.left) {
                 Avatar.rotate(false);
@@ -57,7 +63,7 @@ class Avatar {
 }
 
 Avatar.absoluteRotation = 0;
-Avatar.height = 1;
+Avatar.height = 20;
 Avatar.mesh = null;
 Avatar.rotationSpeed = 0.01;
-Avatar.walkSpeed = 0.07;
+Avatar.walkSpeed = .75;
