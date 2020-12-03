@@ -20,6 +20,11 @@ class Input {
             case 68: //D
                 Input.key.right = true;
                 break;
+            case 83: // s
+            case 40: // arrow down
+                Input.key.down = true;
+                break;
+            
         }
     }
     
@@ -37,6 +42,11 @@ class Input {
             case 68: //D
                 Input.key.right = false;
                 break;
+            case 83: // s
+            case 40: // arrow down
+                Input.key.down = false;
+                break;
+            
         }
     }
 }
