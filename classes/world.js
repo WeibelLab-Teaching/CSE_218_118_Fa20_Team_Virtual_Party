@@ -19,7 +19,7 @@ class World {
         engine.runRenderLoop(() => {
             World.scene.render();
             Avatar.update();
-            World.updateCamera();
+            // World.updateCamera();
         });        
         
         //Resize event
@@ -29,19 +29,19 @@ class World {
     }
     
     static setupCamera() {
-        World.camera = new BABYLON.FreeCamera("thirdPersonCam", BABYLON.Vector3.Zero(), World.scene);
-        World.camera.position.x -= Math.sin(-Math.PI/2) * -1 * World.cameraDistance;
-        World.camera.position.y = Avatar.height + Avatar.height/2;
-        World.camera.position.z -= Math.cos(-Math.PI/2) * -1 * World.cameraDistance;
-        var lookAt = BABYLON.Vector3.Zero();
-        lookAt.y = Avatar.height + Avatar.height/2;
-        World.camera.setTarget(lookAt);
-        World.scene.activeCameras.push(World.camera);
+        // World.camera = new BABYLON.FreeCamera("thirdPersonCam", BABYLON.Vector3.Zero(), World.scene);
+        // World.camera.position.x -= Math.sin(-Math.PI/2) * -1 * World.cameraDistance;
+        // World.camera.position.y = Avatar.height + Avatar.height/2;
+        // World.camera.position.z -= Math.cos(-Math.PI/2) * -1 * World.cameraDistance;
+        // var lookAt = BABYLON.Vector3.Zero();
+        // lookAt.y = Avatar.height + Avatar.height/2;
+        // World.camera.setTarget(lookAt);
+        // World.scene.activeCameras.push(World.camera);
 
         // For testing purpose
-        // var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
-        // camera.attachControl(World.canvas, true);
-        // camera.minZ = 0.1;
+        var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
+        camera.attachControl(World.canvas, true);
+        camera.minZ = 0.1;
     }
     
     static setupGround() {
@@ -56,7 +56,7 @@ class World {
             'h' : 5,
             'w' : 5
         };
-        var tiledGround = new BABYLON.MeshBuilder.CreateTiledGround("tiledGround", {xmin: -500, zmin: -500, xmax: 500, zmax: 500, subdivisions: grid});
+        var tiledGround = new BABYLON.MeshBuilder.CreateTiledGround("tiledGround", {xmin: -250, zmin: -250, xmax: 250, zmax: 250, subdivisions: grid});
         var material = new BABYLON.StandardMaterial("matGround", World.scene);
         material.diffuseTexture = new BABYLON.Texture("assets/images/worn_white_floor.jpg", World.scene);  
         const multimat = new BABYLON.MultiMaterial("multi", World.scene);
@@ -81,7 +81,7 @@ class World {
     }
 
     static setupSkybox() {
-        var skybox = BABYLON.MeshBuilder.CreateBox("SkyBox", {size:1000.0}, World.scene);
+        var skybox = BABYLON.MeshBuilder.CreateBox("SkyBox", {size:500.0}, World.scene);
         var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", World.scene);
         skyboxMaterial.backFaceCulling = false;
         skyboxMaterial.reflectionTexture = new BABYLON.HDRCubeTexture("assets/images/Barce_Rooftop_C_3k.hdr", World.scene, 768);
@@ -95,20 +95,24 @@ class World {
     }
 
     static addMesh() {
-        BABYLON.SceneLoader.Append('./', 'untitled.gltf', World.scene, function(scene){});
+        BABYLON.SceneLoader.ImportMesh(null, './', 'untitled.gltf', World.scene, function(meshes){
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(0, 0, 0);
+        });
     }
 
-    static updateCamera() {
-        if (Avatar.mesh !== null) {
-            World.camera.position.x = Avatar.mesh.position.x;
-            World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
-            World.camera.position.z = Avatar.mesh.position.z;
-            World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-            World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-            var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
-            World.camera.setTarget(lookAt);
-        }
-    }
+    // static updateCamera() {
+    //     if (Avatar.mesh !== null) {
+    //         World.camera.position.x = Avatar.mesh.position.x;
+    //         World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
+    //         World.camera.position.z = Avatar.mesh.position.z;
+    //         World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+    //         World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+    //         var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
+    //         World.camera.setTarget(lookAt);
+    //     }
+    // }
 }
 
 World.cameraDistance = 1.5;
