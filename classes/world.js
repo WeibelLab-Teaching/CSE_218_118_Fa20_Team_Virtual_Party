@@ -152,16 +152,16 @@ class World {
     }
 
     static updateCamera() {
-        if (Avatar.mesh !== null) {
-            World.camera.position.x = Avatar.mesh.position.x;
-            World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
-            World.camera.position.z = Avatar.mesh.position.z;
-            World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-            World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-            var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
-            World.camera.setTarget(lookAt);
-        }
-    }
+         if (Avatar.mesh !== null) {
+             World.camera.position.x = Avatar.mesh.position.x;
+             World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
+             World.camera.position.z = Avatar.mesh.position.z;
+             World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+             World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+             var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
+             World.camera.setTarget(lookAt);
+         }
+     }
 }
 
 World.cameraDistance = .1;
