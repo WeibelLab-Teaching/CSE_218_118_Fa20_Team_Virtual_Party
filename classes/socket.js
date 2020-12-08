@@ -43,4 +43,5 @@ class Socket {
     }
 };
 
-Socket.host = "ws://localhost:5000"; //Use "wss" if connecting to secure server
+Socket.host = "ws://localhost:5000"; // LOCAL
+//Socket.host = "wss://www.cspears.site:5000"; // SERVER 
