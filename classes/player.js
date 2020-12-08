@@ -6,7 +6,9 @@ class Player {
     constructor(id, username) {
         var height = 20;
         this.id = id;
-        this.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: Avatar.height, width: Avatar.width, depth: Avatar.depth}, World.scene);
+        this.mesh = BABYLON.MeshBuilder.CreateCapsule("player", { height: Avatar.height-5, radius: 6, topCapSubdivisions:6, capSubdivisions:1 }, World.scene);
+        //this.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: Avatar.height + 20, width: Avatar.width + 20, depth: Avatar.depth + 20}, World.scene);
+
         this.mesh.position = BABYLON.Vector3.Zero();
         this.mesh.position.x = 0;
         this.mesh.position.y = height/2;
@@ -37,7 +39,7 @@ class Player {
     
     static init() {
         Player.material = new BABYLON.StandardMaterial("matPlayer", World.scene);
-        Player.material.diffuseColor = new BABYLON.Color3.Red();        
+        Player.material.diffuseTexture = new BABYLON.Texture("./assets/skins/def_skin.png", World.scene);       
     }
     
     //Find player and move them
@@ -65,7 +67,7 @@ class Player {
     //Change position and rotation
     transform(x, y, z, rotation) {
         this.mesh.position.x = x;
-        this.mesh.position.y = y;
+        this.mesh.position.y = y + 17;
         this.mesh.position.z = z;
         this.mesh.rotationQuaternion = BABYLON.Quaternion.FromEulerAngles(0, -rotation, 0);
     }
