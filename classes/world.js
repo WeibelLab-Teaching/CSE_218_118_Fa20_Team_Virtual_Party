@@ -29,6 +29,15 @@ class World {
         // Set environmental texture based on the texture of the skybox
         World.scene.environmentTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("assets/images/Barce_Rooftop_C_3k.hdr", World.scene);
 
+        // VR SETUP
+        World.avatars = [];
+        World.selected_mesh= false;
+        World.isSelectingMarker = false;
+        World.selectedMarker = false;
+        World.marker_scale = new BABYLON.Vector3(1,1,1);
+        World.marker_distance = 50;
+        World.setupVR();
+
         engine.runRenderLoop(() => {
             World.scene.render();
             Avatar.update();
@@ -40,7 +49,75 @@ class World {
             engine.resize();
         });
     }
+   
+    static setupVR() {
+
+        // import cubes
+        for(var i = 0; i < 4; i++){
+            var cube = BABYLON.MeshBuilder.CreateBox("cube", {height: 1, width: 10, depth: 10}, World.scene);
+            cube.material = new BABYLON.StandardMaterial("matAvatar", World.scene);
+            cube.material.diffuseColor = new BABYLON.Color3.Green();
+            cube.position = new BABYLON.Vector3(0, 0, 0);
+            cube.scaling = World.marker_scale;
+            World.avatars.push(cube);
+        }
+
+        World.vrHelper = World.scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
+        World.vrHelper.enableInteractions();
+        World.vrHelper.updateGazeTrackerScale = true;
+      
+
+        World.vrHelper.onNewMeshSelected.add(function(mesh) {
+            if (!World.isSelectingMarker && mesh.name == "cube") {
+                World.selected_mesh= mesh;
+                World.selected_mesh.material.diffuseColor = BABYLON.Color3.Blue();
+                World.isSelectingMarker = true;
+            }
+            else {
+                World.isSelectingMarker = false;
+                World.selectedMarker = false;
+                World.selected_mesh.material.diffuseColor = BABYLON.Color3.Green();
+                World.selected_mesh.scaling.x = 1;
+                World.selected_mesh.scaling.y = 1;
+                World.selected_mesh.scaling.z = 1;
+            }   
+            });
+
+            World.scene.registerBeforeRender(function () {
+                for (var i = 0; i < World.avatars.length; i++) {
+                    World.avatars[i].rotation.y += 0.01;
+                }
+                if (World.isSelectingMarker && !World.selectedMarker && World.selected_mesh.scaling.x <= 1.5) {
+                    World.selected_mesh.scaling.x += 0.005;
+                    World.selected_mesh.scaling.y += 0.005;
+                    World.selected_mesh.scaling.z += 0.005;
+
+                    if (World.selected_mesh.scaling.x >= 1.2) {
+                        World.selectedMarker = true;
+                        World.selected_mesh.scaling.x = 1;
+                        World.selected_mesh.scaling.y = 1;
+                        World.selected_mesh.scaling.z = 1;
+                    }
+                }
+                if (World.selectedMarker) {
+                    World.selected_mesh.material.diffuseColor = BABYLON.Color3.Red();
+                    // move avatar
+                    Avatar.mesh.position.x = World.selected_mesh.position.x;
+                    Avatar.mesh.position.z = World.selected_mesh.position.z;
+                    // adjust camera
+                    World.vrHelper.position.x = Avatar.mesh.position.x;
+                    World.vrHelper.position.z = Avatar.mesh.position.z;
+                    // reset cube
+                    World.selectedMarker = false;
+                    World.selected_mesh.scaling.x = World.marker_scale;
+                    World.selected_mesh.material.diffuseColor = BABYLON.Color3.Green();
+
+                }
+            });
+       
     
+    }
+
     static setupCamera() {
         World.camera = new BABYLON.FreeCamera("firstPersonCam", BABYLON.Vector3.Zero(), World.scene);
         World.camera.position.x -= Math.sin(-Math.PI/2) * -1 * World.cameraDistance;
@@ -49,7 +126,6 @@ class World {
         var lookAt = BABYLON.Vector3.Zero();
         lookAt.y = Avatar.height + Avatar.height/2;
         World.camera.setTarget(lookAt);
-        World.scene.activeCameras.push(World.camera);
 
         // DO NOT DELETE! This part is for testing purpose, to create a free camera for fast env check
         // var camera = new BABYLON.FreeCamera("Camera", BABYLON.Vector3.Zero(), World.scene);
@@ -210,6 +286,16 @@ class World {
     }
 
     static updateCamera() {
+        if(World.vrHelper.isInVRMode) {
+            for(var i = 0; i < World.avatars.length; i++) {
+                World.avatars[i].visibility = 1;
+            } 
+         }
+         else {
+            for(var i = 0; i < World.avatars.length; i++) {
+                World.avatars[i].visibility = 0;
+            } 
+         }
         if (Avatar.mesh !== null) {
             World.camera.position.x = Avatar.mesh.position.x;
             World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
@@ -218,6 +304,19 @@ class World {
             World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
             var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
             World.camera.setTarget(lookAt);
+
+            World.vrHelper.position.x = Avatar.mesh.position.x;
+            World.vrHelper.position.y = Avatar.mesh.position.y + Avatar.height;
+            World.vrHelper.position.z = Avatar.mesh.position.z;
+            World.vrHelper.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+            World.vrHelper.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+
+            var dx = [0, 0, World.marker_distance, -World.marker_distance]
+            var dz = [World.marker_distance, -World.marker_distance, 0, 0 ]
+            for(var i = 0; i < 4; i++){
+                World.avatars[i].position.x = Avatar.mesh.position.x + dx[i];
+                World.avatars[i].position.z = Avatar.mesh.position.z + dz[i];
+            }
         }
     }
 }

@@ -6,12 +6,11 @@
 class Avatar {
     
     static init() {
-        Avatar.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: Avatar.height, width: 10, depth: 10}, World.scene);
+        Avatar.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: 0, width: 0, depth: 0}, World.scene);
         Avatar.mesh.position = BABYLON.Vector3.Zero();
         Avatar.mesh.position.y = Avatar.height/2;
         Avatar.mesh.material = new BABYLON.StandardMaterial("matAvatar", World.scene);
         Avatar.mesh.material.diffuseColor = new BABYLON.Color3.Green();
-        new Billboard(Avatar.mesh, Avatar.username);
     }   
     
     static rotate(isLeft) {
