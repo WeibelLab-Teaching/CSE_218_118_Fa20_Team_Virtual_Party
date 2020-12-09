@@ -48,24 +48,33 @@
 			}
 
 		</style>
-        <script src="./vendor/babylon.js"></script>
-        <script src="./vendor/babylonjs.loaders.min.js"></script>
-		<script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
-		<script src="https://code.jquery.com/pep/0.4.3/pep.min.js"></script>
-		<script src="classes/avatar.js"></script>
-		<script src="classes/billboard.js"></script>
-		<script src="classes/input.js"></script>
-		<script src="classes/player.js"></script>
-		<script src="classes/socket.js"></script>
-		<script src="classes/UI.js"></script>
-		<script src="classes/world.js"></script>
 	</head>
-    <body onload='init()'>	<!-- init function for voice chat -->
+    <body >	<!-- init function for voice chat -->
 		<h1>Virtual Party!!!</h1>
 		<span>Username: </span><input type="text" id="username">&nbsp;&nbsp;
-		<button id="login" onclick='UI.login();
-		document.getElementById("canvas").style.top = "0px"
-		document.getElementById("canvas").style.height = "calc(100%)"
+
+
+		<script>
+			async function login_click_helper() {
+				localStorage.setItem("username", document.getElementById("username").value);
+				var ele = document.getElementsByName('skin'); 
+				for(var i = 0; i < ele.length; i++) { 
+					if(ele[i].checked) {
+						localStorage.setItem("skin",ele[i].value);
+					}
+				}
+				document.getElementById("canvas").style.top = "0px"
+				document.getElementById("canvas").style.height = "calc(100%)"
+			}
+
+			async function login_click() {
+				await login_click_helper();
+        		window.location.href = "./game.html";
+			}
+		</script>
+
+
+		<button id="login" onclick='login_click();
 		
 		'>Log-in</button>
 		<canvas id="canvas"></canvas>
@@ -92,5 +101,4 @@
 
 
 	</body>
-	<script src="client.js"></script>
 </html>
