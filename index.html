@@ -15,7 +15,7 @@
 			canvas {
 				position: absolute;
 				left: 0;
-				top: 100px;
+				top: 300px;
 				height: calc(100% - 100px);
 				width: 100%;
 				background-color: rgba(0,0,0,0);
@@ -26,6 +26,27 @@
 			h1 {
 				font-family: Arial;
 			}
+
+			/* HIDE RADIO */
+			[type=radio] { 
+				position: absolute;
+				opacity: 0;
+				width: 0;
+				height: 0;
+			}
+
+			/* IMAGE STYLES */
+			[type=radio] + img {
+				cursor: pointer;
+				margin-right: 10px;
+				margin-left: 10px;
+			}
+
+			/* CHECKED STYLES */
+			[type=radio]:checked + img {
+				outline: 10px solid rgb(43, 255, 0);
+			}
+
 		</style>
         <script src="./vendor/babylon.js"></script>
         <script src="./vendor/babylonjs.loaders.min.js"></script>
@@ -40,13 +61,36 @@
 		<script src="classes/world.js"></script>
 	</head>
     <body onload='init()'>	<!-- init function for voice chat -->
-		<h1>Multiplayer Game</h1>
+		<h1>Virtual Party!!!</h1>
 		<span>Username: </span><input type="text" id="username">&nbsp;&nbsp;
 		<button id="login" onclick='UI.login();
 		document.getElementById("canvas").style.top = "0px"
 		document.getElementById("canvas").style.height = "calc(100%)"
+		
 		'>Log-in</button>
 		<canvas id="canvas"></canvas>
+
+		<label>
+			<input type="radio" name="skin"  value="happy_skin.png">
+			<img src="assets/skins/happy_icon.png">
+		</label>
+
+		<label>
+			<input type="radio" name="skin"  value="angry_skin.png">
+			<img src="assets/skins/angry_icon.png">
+		</label>
+
+		<label>
+			<input type="radio" name="skin" value="robot_skin.png" checked>
+			<img src="assets/skins/robot_icon.png">
+		</label>
+
+		<label>
+			<input type="radio" name="skin"  value="ooga_mask.png">
+			<img src="assets/skins/ooga_mask_icon.png">
+		</label>
+
+
 	</body>
 	<script src="client.js"></script>
 </html>

@@ -3,7 +3,14 @@
 class UI {
     
     static login() {
-        var username = UI.username.value;
+        var skin;
+        var ele = document.getElementsByName('skin'); 
+        for(var i = 0; i < ele.length; i++) { 
+            if(ele[i].checked) {
+                skin = ele[i].value;
+            }
+        }
+        var username = UI.username.value + "," + skin;
         Socket.init(username);
     }
     

@@ -9,7 +9,9 @@ class Socket {
 
         Socket.ws.onopen = () => {
             console.log("Connected");
-            Avatar.username = username;
+            var data = username.split(",");
+            Avatar.username = data[0];
+
             
             //Authenticate with server by sending username
             Socket.ws.send(`{"command":"username","data":"${username}"}`);
