@@ -120,6 +120,93 @@ class World {
     static addMesh(shadowGenerator, hdrTexture) {
         var dz = [0, 200, 0, 200, 0, 200];
         var dx = [0, 0, 100, 100, 200, 200];
+
+        // Import 6 table: 1st
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[0], 0, -100 + dz[0]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
+        });
+        // Import 6 table: 2nd
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[1], 0, -100 + dz[1]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
+        });
+        // Import 6 table: 3rd
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[2], 0, -100 + dz[2]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
+        });
+        // Import 6 table: 4th
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[3], 0, -100 + dz[3]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
+        });
+        // Import 6 table: 5th
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[4], 0, -100 + dz[4]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
+        });
+        // Import 6 table: 6th
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
+            var table = meshes[0];
+            table.scaling = new BABYLON.Vector3(5, 5, 5);
+            table.position = new BABYLON.Vector3(-100 + dx[5], 0, -100 + dz[5]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
+        });
+
+        // Import Bar Table
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/bar_table.glb', World.scene, function(meshes){
+            var bar_table = meshes[0];
+            bar_table.scaling = new BABYLON.Vector3(3.5, 3.5, 3.5);
+            bar_table.rotate(BABYLON.Axis.Y, Math.PI / 2, World.scene);
+            bar_table.position = new BABYLON.Vector3(-220, 0, 0);
+            
+            // Shadows
+            shadowGenerator.addShadowCaster(bar_table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
+        });
     }
 
     static updateCamera() {
