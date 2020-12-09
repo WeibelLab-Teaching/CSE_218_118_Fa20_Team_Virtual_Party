@@ -5,16 +5,29 @@
 class World {
     static init() {
         World.canvas = document.getElementById("canvas");
+
+        // Initialize the main engine
         var engine = new BABYLON.Engine(World.canvas, true);
         MediaStreamTrackEvent
         World.scene = new BABYLON.Scene(engine);
-        World.setupCamera();        
-        World.setupLights();
-        World.setupGround();
-        World.setupSkybox();
+        World.scene.imageProcessingConfiguration.exposure = 1.5;
+        World.scene.imageProcessingConfiguration.contrast = 1;
 
-        // MY METHODS
-        World.addMesh();
+        // Set overall HDR texture
+        var hdrTexture = new BABYLON.HDRCubeTexture("assets/images/Barce_Rooftop_C_3k.hdr", World.scene, 512);
+
+        // Finish setting up the virtual space
+        World.setupCamera();
+        World.setupSkybox(hdrTexture);
+        World.setupGround();       
+        var shadowGenerator = World.setupLights();
+        
+
+        // Import Meshes
+        World.addMesh(shadowGenerator, hdrTexture);
+
+        // Set environmental texture based on the texture of the skybox
+        World.scene.environmentTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("assets/images/Barce_Rooftop_C_3k.hdr", World.scene);
 
         engine.runRenderLoop(() => {
             World.scene.render();
@@ -38,20 +51,14 @@ class World {
         World.camera.setTarget(lookAt);
         World.scene.activeCameras.push(World.camera);
 
-        // For testing purpose
-        //var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 4, Math.PI / 2.5, 200, BABYLON.Vector3.Zero(), World.scene);
-        //camera.attachControl(World.canvas, true);
-        //camera.minZ = 0.1;
+        // DO NOT DELETE! This part is for testing purpose, to create a free camera for fast env check
+        // var camera = new BABYLON.FreeCamera("Camera", BABYLON.Vector3.Zero(), World.scene);
+        // camera.attachControl(World.canvas, true);
+        // camera.minZ = 0.1;
     }
     
-    static setupGround() {
-        // Old floor setup
-        // var ground = BABYLON.MeshBuilder.CreateGround("ground", { width:1000, height: 1000, subdivisions: 100 }, World.scene);
-        // ground.position = new BABYLON.Vector3(0, -50, 0);
-        // ground.material = new BABYLON.StandardMaterial("matGround", World.scene);
-        // ground.material.diffuseTexture = new BABYLON.Texture("assets/images/worn_white_floor.jpg", World.scene);        
-
-        // Try tiled ground option
+    static setupGround() {    
+        // Setup tiled ground
         var grid = {
             'h' : 5,
             'w' : 5
@@ -78,67 +85,113 @@ class World {
                 base += tileIndicesLength;
             }
         }
+
+        // Enable shadow receiving on ground
+        tiledGround.receiveShadows = true;
     }
 
-    static setupSkybox() {
-        var skybox = BABYLON.MeshBuilder.CreateBox("SkyBox", {size:500.0}, World.scene);
-        var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", World.scene);
+    static setupSkybox(hdrTexture) {
+        var skybox = BABYLON.Mesh.CreateBox("SkyBox", 500.0, World.scene);
+        var skyboxMaterial = new BABYLON.PBRMaterial("skyBox", World.scene);
         skyboxMaterial.backFaceCulling = false;
-        skyboxMaterial.reflectionTexture = new BABYLON.HDRCubeTexture("assets/images/Barce_Rooftop_C_3k.hdr", World.scene, 768);
+        skyboxMaterial.reflectionTexture = hdrTexture.clone();
         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+        skyboxMaterial.microSurface = 1.0;
+        skyboxMaterial.disableLighting = true;
+        // skybox.infiniteDistance = true;
         skybox.material = skyboxMaterial;
     }
     
-    static setupLights() {
-        var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), World.scene);
-        light.intensity = 0.7;        
+    static setupLights() {   
+        var light = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(-0.5, -0.6, 0.3), World.scene);
+        // var light = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(-1, 1, -1), new BABYLON.Vector3(0, -1, 0), Math.PI / 2, 10, World.scene);
+        light.position = new BABYLON.Vector3(250, 100, 250);
+        light.shadowOrthoScale = 0.2; 
+        light.intensity = 1.2;  
+        light.diffuse = new BABYLON.Color3(0.95, 0.85, 0.71, 0.43);
+
+        var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+        shadowGenerator.useBlurExponentialShadowMap = true;
+        shadowGenerator.blurKernel = 32;
+        shadowGenerator.setDarkness(0.6);
+        return shadowGenerator;
     }
 
-    static addMesh() {
-        var i = 0;
-        var table_nums = 6;
+    static addMesh(shadowGenerator, hdrTexture) {
         var dz = [0, 200, 0, 200, 0, 200];
         var dx = [0, 0, 100, 100, 200, 200];
 
-        // Import 6 table
-        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+        // Import 6 table: 1st
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
             var table = meshes[0];
             table.scaling = new BABYLON.Vector3(5, 5, 5);
-            table.position = new BABYLON.Vector3(-100 + dx[i], 0, -100 + dz[i]);
+            table.position = new BABYLON.Vector3(-100 + dx[0], 0, -100 + dz[0]);
 
-            // for (i = 1; i < table_nums; i++) {			
-            //     meshes.forEach(function (m) {
-            //         var clone = m.clone("newname");
-            //         clone.position.x += dx[i];
-            //         clone.position.z += dz[i];
-            //     });
-            // }
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
         });
-        
-        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+        // Import 6 table: 2nd
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
             var table = meshes[0];
             table.scaling = new BABYLON.Vector3(5, 5, 5);
             table.position = new BABYLON.Vector3(-100 + dx[1], 0, -100 + dz[1]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
         });
-        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+        // Import 6 table: 3rd
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
             var table = meshes[0];
             table.scaling = new BABYLON.Vector3(5, 5, 5);
             table.position = new BABYLON.Vector3(-100 + dx[2], 0, -100 + dz[2]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
         });
-        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+        // Import 6 table: 4th
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
             var table = meshes[0];
             table.scaling = new BABYLON.Vector3(5, 5, 5);
             table.position = new BABYLON.Vector3(-100 + dx[3], 0, -100 + dz[3]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
         });
-        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+        // Import 6 table: 5th
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
             var table = meshes[0];
             table.scaling = new BABYLON.Vector3(5, 5, 5);
             table.position = new BABYLON.Vector3(-100 + dx[4], 0, -100 + dz[4]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
         });
-        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes){
+        // Import 6 table: 6th
+        BABYLON.SceneLoader.ImportMesh(null, './', 'assets/models/dining_table_new.glb', World.scene, function(meshes) {
             var table = meshes[0];
             table.scaling = new BABYLON.Vector3(5, 5, 5);
             table.position = new BABYLON.Vector3(-100 + dx[5], 0, -100 + dz[5]);
+
+            // Shadows
+            shadowGenerator.addShadowCaster(table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
         });
 
         // Import Bar Table
@@ -147,21 +200,26 @@ class World {
             bar_table.scaling = new BABYLON.Vector3(3.5, 3.5, 3.5);
             bar_table.rotate(BABYLON.Axis.Y, Math.PI / 2, World.scene);
             bar_table.position = new BABYLON.Vector3(-220, 0, 0);
+            
+            // Shadows
+            shadowGenerator.addShadowCaster(bar_table, true);
+            for (var index = 0; index < meshes.length; index++) {
+                shadowGenerator.addShadowCaster(meshes[index], true);
+            }
         });
-
     }
 
     static updateCamera() {
-         if (Avatar.mesh !== null) {
-             World.camera.position.x = Avatar.mesh.position.x;
-             World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
-             World.camera.position.z = Avatar.mesh.position.z;
-             World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-             World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
-             var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
-             World.camera.setTarget(lookAt);
-         }
-     }
+        if (Avatar.mesh !== null) {
+            World.camera.position.x = Avatar.mesh.position.x;
+            World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
+            World.camera.position.z = Avatar.mesh.position.z;
+            World.camera.position.z -= Math.sin(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+            World.camera.position.x -= Math.cos(Avatar.absoluteRotation - Math.PI) * -1 * World.cameraDistance;
+            var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
+            World.camera.setTarget(lookAt);
+        }
+    }
 }
 
 World.cameraDistance = .1;
