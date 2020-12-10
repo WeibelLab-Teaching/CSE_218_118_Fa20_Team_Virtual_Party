@@ -24,7 +24,7 @@ class World {
         
 
         // Import Meshes
-        World.addMesh(shadowGenerator, hdrTexture);
+        World.addMesh(shadowGenerator);
 
         // Set environmental texture based on the texture of the skybox
         World.scene.environmentTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("assets/images/Barce_Rooftop_C_3k.hdr", World.scene);
@@ -192,7 +192,7 @@ class World {
         return shadowGenerator;
     }
 
-    static addMesh(shadowGenerator, hdrTexture) {
+    static addMesh(shadowGenerator) {
         var dz = [0, 200, 0, 200, 0, 200];
         var dx = [0, 0, 100, 100, 200, 200];
 
