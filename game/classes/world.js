@@ -13,6 +13,10 @@ class World {
         World.scene.imageProcessingConfiguration.exposure = 1.3;
         World.scene.imageProcessingConfiguration.contrast = 1;
 
+        // Adjust in-game audio volume
+        // World.audioEngine = World.engine.audioEngine();
+        // World.audioEngine.setGlobalVolume(0.01);
+
         // Set overall HDR texture
         var hdrTexture = new BABYLON.HDRCubeTexture("assets/images/Barce_Rooftop_C_3k.hdr", World.scene, 512);
 
@@ -29,7 +33,7 @@ class World {
         // Setting in order for the video to be seen
         World.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
         var videoID = 'UnA7tepsc7s';
-        var css3DRenderer = World.setupVideo(videoID);
+        // var css3DRenderer = World.setupVideo(videoID);
 
         // Set environmental texture based on the texture of the skybox
         World.scene.environmentTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("assets/images/Barce_Rooftop_C_3k.hdr", World.scene);
@@ -42,14 +46,15 @@ class World {
         World.marker_scale = new BABYLON.Vector3(1,1,1);
         World.marker_distance = 50;
         World.setupVR();
+        World.setupLocalVid();
 
         World.engine.runRenderLoop(() => {
             World.scene.render();
             Avatar.update();
             World.updateCamera();
-            World.scene.onBeforeRenderObservable.add(() => {
-                css3DRenderer.render(World.scene, World.camera);
-            })
+            // World.scene.onBeforeRenderObservable.add(() => {
+            //     css3DRenderer.render(World.scene, World.camera);
+            // })
         });        
         
         //Resize event
@@ -71,7 +76,7 @@ class World {
         }
 
         World.vrHelper = World.scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
-        World.vrHelper.enableInteractions();
+        // World.vrHelper.enableInteractions();
         World.vrHelper.updateGazeTrackerScale = true;
 
 
@@ -119,9 +124,49 @@ class World {
                     World.selectedMarker = false;
                     World.selected_mesh.scaling.x = World.marker_scale;
                     World.selected_mesh.material.diffuseColor = BABYLON.Color3.Green();
-
                 }
             });
+    }
+
+    static setupLocalVid() {
+        var ANote0 = BABYLON.MeshBuilder.CreateBox("ANote0", {width: 200, height: 112, depth: 0.1 }, World.scene);
+        // ANote0.position = BABYLON.Vector3(0, 70, 0);
+        ANote0.position.x = 250;
+        ANote0.position.y = 70;
+        ANote0.position.z = 0;
+        ANote0.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
+        var mat = new BABYLON.StandardMaterial("ANote0Mat",World.scene);
+        mat.diffuseColor = new BABYLON.Color4(0, 0, 0, 1);
+        ANote0.material = mat;
+        var planeOpts = {
+                height: 112, 
+                width: 200, 
+                // sideOrientation: BABYLON.Mesh.BACKSIDE
+        };
+        var ANote0Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, World.scene);
+        // var vidPos = (new BABYLON.Vector3(0,0,0.1)).addInPlace(ANote0.position);
+        // var vidPos = ANote0.position;
+        // ANote0Video.position = vidPos;
+        ANote0Video.position.x = 250 - 0.3;
+        ANote0Video.position.y = 70;
+        ANote0Video.position.z = 0;
+        ANote0Video.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
+        var ANote0VideoMat = new BABYLON.StandardMaterial("m", World.scene);
+        var ANote0VideoVidTex = new BABYLON.VideoTexture("vidtex","assets/nfl_highlights.mp4", World.scene);
+        ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
+        ANote0VideoMat.roughness = 1;
+        ANote0VideoMat.emissiveColor = new BABYLON.Color3.White();
+        ANote0Video.material = ANote0VideoMat;
+        World.scene.onPointerObservable.add(function(evt){
+                if(evt.pickInfo.pickedMesh === ANote0Video){
+                    //console.log("picked");
+                        if(ANote0VideoVidTex.video.paused)
+                            ANote0VideoVidTex.video.play();
+                        else
+                            ANote0VideoVidTex.video.pause();
+                        console.log(ANote0VideoVidTex.video.paused?"paused":"playing");
+                }
+        }, BABYLON.PointerEventTypes.POINTERPICK);
     }
 
     static setupCamera() {
@@ -343,10 +388,10 @@ class World {
         var videoViewMesh = BABYLON.MeshBuilder.CreatePlane("videoViewMesh", { width: 1, height: 1 }, World.scene);
         videoViewMesh.scaling.x = videoViewLength
         videoViewMesh.scaling.y = videoViewHeight
-        videoViewMesh.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
-        videoViewMesh.position.y = 70;
-        videoViewMesh.position.x = 250 - tvThickness - 1;
-        videoViewMesh.position.z = 1;
+        // videoViewMesh.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
+        // videoViewMesh.position.y = 70;
+        // videoViewMesh.position.x = 250 - tvThickness - 1;
+        // videoViewMesh.position.z = 1;
 
 
         // Setup the CSS css3DRenderer and Youtube object
