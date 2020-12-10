@@ -10,7 +10,7 @@ class World {
         var engine = new BABYLON.Engine(World.canvas, true);
         MediaStreamTrackEvent
         World.scene = new BABYLON.Scene(engine);
-        World.scene.imageProcessingConfiguration.exposure = 1.5;
+        World.scene.imageProcessingConfiguration.exposure = 1.3;
         World.scene.imageProcessingConfiguration.contrast = 1;
 
         // Set overall HDR texture
@@ -176,6 +176,7 @@ class World {
         skyboxMaterial.disableLighting = true;
         // skybox.infiniteDistance = true;
         skybox.material = skyboxMaterial;
+        skybox.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
     }
     
     static setupLights() {   
