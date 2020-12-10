@@ -7,9 +7,9 @@ class World {
         World.canvas = document.getElementById("canvas");
 
         // Initialize the main engine
-        var engine = new BABYLON.Engine(World.canvas, true);
+        World.engine = new BABYLON.Engine(World.canvas, true);
         MediaStreamTrackEvent
-        World.scene = new BABYLON.Scene(engine);
+        World.scene = new BABYLON.Scene(World.engine);
         World.scene.imageProcessingConfiguration.exposure = 1.3;
         World.scene.imageProcessingConfiguration.contrast = 1;
 
@@ -26,6 +26,11 @@ class World {
         // Import Meshes
         World.addMesh(shadowGenerator);
 
+        // Setting in order for the video to be seen
+        World.scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
+        var videoID = 'UnA7tepsc7s';
+        var css3DRenderer = World.setupVideo(videoID);
+
         // Set environmental texture based on the texture of the skybox
         World.scene.environmentTexture = new BABYLON.CubeTexture.CreateFromPrefilteredData("assets/images/Barce_Rooftop_C_3k.hdr", World.scene);
 
@@ -38,15 +43,18 @@ class World {
         World.marker_distance = 50;
         World.setupVR();
 
-        engine.runRenderLoop(() => {
+        World.engine.runRenderLoop(() => {
             World.scene.render();
             Avatar.update();
             World.updateCamera();
+            World.scene.onBeforeRenderObservable.add(() => {
+                css3DRenderer.render(World.scene, World.camera);
+            })
         });        
         
         //Resize event
         window.addEventListener("resize", () => {
-            engine.resize();
+            World.engine.resize();
         });
     }
 
@@ -317,6 +325,132 @@ class World {
                 World.avatars[i].position.z = Avatar.mesh.position.z + dz[i];
             }
         }
+    }
+
+    static setupVideo(videoID) {
+        let videoViewLength = 200
+        let videoViewHeight = 112
+        let tvThickness = 2
+
+         //TV Box
+        var box = BABYLON.MeshBuilder.CreateBox("box", { size: 1 }, World.scene);
+        box.scaling = new BABYLON.Vector3(tvThickness / 2 + .01, videoViewHeight + tvThickness, videoViewLength + tvThickness);
+        box.position = new BABYLON.Vector3(250 - tvThickness, 70, tvThickness / 2 + .01);
+        box.rotation = new BABYLON.Vector3(0, -Math.PI, 0);
+
+
+        // The CSS object will follow this mesh
+        var videoViewMesh = BABYLON.MeshBuilder.CreatePlane("videoViewMesh", { width: 1, height: 1 }, World.scene);
+        videoViewMesh.scaling.x = videoViewLength
+        videoViewMesh.scaling.y = videoViewHeight
+        videoViewMesh.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
+        videoViewMesh.position.y = 70;
+        videoViewMesh.position.x = 250 - tvThickness - 1;
+        videoViewMesh.position.z = 1;
+
+
+        // Setup the CSS css3DRenderer and Youtube object
+        var [css3DRenderer, container] = World.setupRenderer(videoViewMesh, videoID, World.scene);
+
+        // add actionManager
+        videoViewMesh.actionManager = new BABYLON.ActionManager(World.scene);
+        videoViewMesh.actionManager.registerAction(
+            new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger,
+                function (event) {
+                    console.log(`hit`)
+                    console.log(container)
+                    container.style.zIndex = 10
+                })
+        );
+
+        document.addEventListener("click", (e) => {
+            console.log(e.target)
+            if (e.target.id === "CSS3DRendererDom") {
+                // console.log(hiding)
+                container.style.zIndex = "-1"
+            }
+        })
+
+        return css3DRenderer;
+    }
+
+    static removeDomNode(id) {
+        let node = document.getElementById(id);
+        if (node && node.parentNode) {
+            node.parentNode.removeChild(node);
+        }
+    }
+
+    static setupRenderer(videoViewMesh, videoID, scene) {
+        let videoWidth = 1920;
+        let videoHeight = 1080;
+
+        //div holding WebGL scene canvas
+        let webGLContainer = document.getElementById('canvasZone');
+    
+        //Remove Old Nodes
+        World.removeDomNode("cssContainer");
+        World.removeDomNode("CSS3DRendererDom");
+    
+        //Add Container for CSS
+        //Canvas Container for css3DRenderer
+        let css3DContainer = document.createElement('div');
+        css3DContainer.id = 'cssContainer';
+        css3DContainer.style.position = 'absolute';
+        css3DContainer.style.width = '100%';
+        css3DContainer.style.height = '100%';
+        css3DContainer.style.zIndex = '-1';
+    
+        //add css3DContainer behind WebGl scene
+        webGLContainer.insertBefore(css3DContainer, webGLContainer.firstChild);
+    
+        //Add CSS3D css3DRenderer
+        let css3DRenderer = new CSS3DRenderer();
+    
+        //appendcss3DRenderer in css3DContainer behind WebGL scene
+        css3DContainer.appendChild(css3DRenderer.domElement);
+    
+        //Set CSS container size same as WebGL Container Size
+        css3DRenderer.setSize(webGLContainer.offsetWidth, webGLContainer.offsetHeight);
+    
+        //add iframe Container
+        var iframeContainer = document.createElement('div');
+        iframeContainer.style.width = videoWidth + 'px';
+        iframeContainer.style.height = videoHeight + 'px';
+        iframeContainer.style.backgroundColor = '#000';
+        iframeContainer.id = "iframeContainer";
+    
+        //CSS Object
+        var CSSobject = new CSS3DObject(iframeContainer, scene);
+        CSSobject.position.copyFrom(videoViewMesh.getAbsolutePosition());
+        CSSobject.rotation.y = -videoViewMesh.rotation.y;
+        CSSobject.scaling.copyFrom(videoViewMesh.scaling);
+    
+        // append iframe
+        var iframe = document.createElement('iframe');
+        iframe.id = 'video-' + videoID;
+        iframe.style.width = videoWidth + 'px';
+        iframe.style.height = videoHeight + 'px';
+        iframe.style.border = '0px';
+        iframe.allow = 'autoplay';
+        iframe.src = ['https://www.youtube.com/embed/', videoID, '?rel=0&enablejsapi=1&disablekb=1&autoplay=1&controls=0&fs=0&modestbranding=1'].join('');
+        iframeContainer.appendChild(iframe);
+    
+        //material
+        let depthMask = new BABYLON.StandardMaterial('VideoViewMaterial', scene);
+        depthMask.backFaceCulling = true;
+        videoViewMesh.material = depthMask;
+    
+        //Render Video the mesh
+        videoViewMesh.onBeforeRenderObservable.add(() => World.engine.setColorWrite(false));
+        videoViewMesh.onAfterRenderObservable.add(() => World.engine.setColorWrite(true));
+    
+        // swap meshes to put mask first
+        var videoPlaneIndex = scene.meshes.indexOf(videoViewMesh);
+        scene.meshes[videoPlaneIndex] = scene.meshes[0];
+        scene.meshes[0] = videoViewMesh;
+    
+        return [css3DRenderer, css3DContainer];
     }
 }
 

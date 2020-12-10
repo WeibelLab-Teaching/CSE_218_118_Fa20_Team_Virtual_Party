@@ -12,6 +12,12 @@
 
 		<title>Virtual Party</title>
 		<style>
+			#canvasZone {
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				background-color: rgba(0,0,0,0);
+			}
 			canvas {
 				position: absolute;
 				height: 100%;
@@ -37,8 +43,8 @@
 	</head>
     <body onload='init()'>	<!-- init function for voice chat -->
 
-		<canvas id="canvas"></canvas>
-
+		<!-- <canvas id="canvas"></canvas> -->
+		<div id="canvasZone"> <canvas touch-action="none" id="canvas"></canvas> </div>
 
 	</body>
 	<script src="client.js"></script>
