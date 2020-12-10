@@ -49,7 +49,7 @@ class World {
             engine.resize();
         });
     }
-   
+
     static setupVR() {
 
         // import cubes
@@ -65,7 +65,7 @@ class World {
         World.vrHelper = World.scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
         World.vrHelper.enableInteractions();
         World.vrHelper.updateGazeTrackerScale = true;
-      
+
 
         World.vrHelper.onNewMeshSelected.add(function(mesh) {
             if (!World.isSelectingMarker && mesh.name == "cube") {
@@ -114,8 +114,6 @@ class World {
 
                 }
             });
-       
-    
     }
 
     static setupCamera() {
@@ -291,12 +289,12 @@ class World {
             for(var i = 0; i < World.avatars.length; i++) {
                 World.avatars[i].visibility = 1;
             } 
-         }
-         else {
+        }
+        else {
             for(var i = 0; i < World.avatars.length; i++) {
                 World.avatars[i].visibility = 0;
             } 
-         }
+        }
         if (Avatar.mesh !== null) {
             World.camera.position.x = Avatar.mesh.position.x;
             World.camera.position.y = Avatar.mesh.position.y + Avatar.height;
