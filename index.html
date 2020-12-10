@@ -1,96 +1,118 @@
+<!DOCTYPE html>
 <html>
-	<head>
-        <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">		
-		<!-- VOICE CHAT-->
+<title>Virtual Party!!!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./index.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<style>
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
 
-		<!--
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-        <script src = "/voice_chat/voice.js"> </script>
-        -->
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("./images/virtual_party.jpg");
+  min-height: 75%;
+}
 
-		<title>Virtual Party</title>
-		<style>
-			span, button {
-				font: 12pt Arial;
-			}
-			h1 {
-				font-family: Arial;
-			}
+.menu {
+  display: none;
+}
+</style>
+<body>
 
-			/* HIDE RADIO */
-			[type=radio] { 
-				position: absolute;
-				opacity: 0;
-				width: 0;
-				height: 0;
-			}
+<!-- Links (sit on top) -->
+<div class="w3-top">
+  <div class="w3-row w3-padding w3-black">
+    <div class="w3-col s3">
+      <a href="#" class="w3-button w3-block w3-black">HOME</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#where" class="w3-button w3-block w3-black">Play</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#about" class="w3-button w3-block w3-black">ABOUT</a>
+    </div>
+  </div>
+</div>
 
-			/* IMAGE STYLES */
-			[type=radio] + img {
-				cursor: pointer;
-				margin-right: 10px;
-				margin-left: 10px;
-			}
+<!-- Header with image -->
+<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-middle w3-center">
+    <span class="w3-text-white" style="font-size:90px">Virtual<br>Party</span>
+  </div>
+</header>
 
-			/* CHECKED STYLES */
-			[type=radio]:checked + img {
-				outline: 10px solid rgb(43, 255, 0);
-			}
+<!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-grayscale w3-large">
 
-		</style>
-	</head>
-    <body >	<!-- init function for voice chat -->
-		<h1>Virtual Party!!!</h1>
-		<span>Username: </span><input type="text" id="username">&nbsp;&nbsp;
-
-
-		<script>
-			async function login_click_helper() {
-				localStorage.setItem("username", document.getElementById("username").value);
-				var ele = document.getElementsByName('skin'); 
-				for(var i = 0; i < ele.length; i++) { 
-					if(ele[i].checked) {
-						localStorage.setItem("skin",ele[i].value);
+<!-- Login Container -->
+<div class="w3-container" id="where" style="padding-bottom:32px;">
+  <div class="w3-content" style="max-width:700px">
+    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">Login</span></h5>
+        <h1>Virtual Party!!!</h1>
+			<span>Username: </span><input type="text" id="username">&nbsp;&nbsp;
+			<br/>
+			<br/>
+			Choose Avatar: 
+			<script>
+				async function login_click_helper() {
+					localStorage.setItem("username", document.getElementById("username").value);
+					var ele = document.getElementsByName('skin'); 
+					for(var i = 0; i < ele.length; i++) { 
+						if(ele[i].checked) {
+							localStorage.setItem("skin",ele[i].value);
+						}
 					}
 				}
-				document.getElementById("canvas").style.top = "0px"
-				document.getElementById("canvas").style.height = "calc(100%)"
-			}
 
-			async function login_click() {
-				await login_click_helper();
-        		window.location.href = "./game.html";
-			}
-		</script>
+				async function login_click() {
+					await login_click_helper();
+					window.location.href = "./game/game.html";
+				}
+			</script>
 
+			<label>
+				<input type="radio" name="skin"  value="happy_skin.png">
+				<img src="/game/assets/skins/happy_icon.png">
+			</label>
 
-		<button id="login" onclick='login_click();
-		
-		'>Log-in</button>
-		<canvas id="canvas"></canvas>
+			<label>
+				<input type="radio" name="skin"  value="angry_skin.png">
+				<img src="/game/assets/skins/angry_icon.png">
+			</label>
 
-		<label>
-			<input type="radio" name="skin"  value="happy_skin.png">
-			<img src="assets/skins/happy_icon.png">
-		</label>
+			<label>
+				<input type="radio" name="skin" value="robot_skin.png" checked>
+				<img src="/game/assets/skins/robot_icon.png">
+			</label>
 
-		<label>
-			<input type="radio" name="skin"  value="angry_skin.png">
-			<img src="assets/skins/angry_icon.png">
-		</label>
+			<label>
+				<input type="radio" name="skin"  value="ooga_mask.png">
+				<img src="/game/assets/skins/ooga_mask_icon.png">
+            </label>
 
-		<label>
-			<input type="radio" name="skin" value="robot_skin.png" checked>
-			<img src="assets/skins/robot_icon.png">
-		</label>
+			<br/>
+			<br/>
 
-		<label>
-			<input type="radio" name="skin"  value="ooga_mask.png">
-			<img src="assets/skins/ooga_mask_icon.png">
-		</label>
+			<button id="login" onclick='login_click();
+			
+			'>Log-in</button>
+  </div>
 
+    <!-- About Container -->
+    <div class="w3-container" id="about">
+    <div class="w3-content" style="max-width:700px">
+        <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">ABOUT VIRTUAL PARTY</span></h5>
+        <p>Virtual Party is a web-based game designed to help people get together in a fun, informal environment.</p>
+        <p>VR is supported but not necessary. With or without a controller!</p>
+        <p>We are currently hosting an outdoor bar that is hosting sports games.</p>
+        <p>Users can login with a username and choose an avatar to join the fun!</p>
 
-	</body>
+    </div>
+    </div>
+</body>
 </html>
