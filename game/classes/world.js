@@ -231,6 +231,7 @@ class World {
     }
     
     static setupLights() {   
+        var hemilight = new BABYLON.HemisphericLight("HemiLight", new BABYLON.Vector3(0, -100, 0), World.scene);
         var light = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(-0.5, -0.6, 0.3), World.scene);
         // var light = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(-1, 1, -1), new BABYLON.Vector3(0, -1, 0), Math.PI / 2, 10, World.scene);
         light.position = new BABYLON.Vector3(250, 100, 250);
