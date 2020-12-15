@@ -1,8 +1,6 @@
 # CSE 218/118 FA20 Team Virtual Party
 Website: cspears.site
 
-
-
     Why the project is useful
         Add the general goals of the project 
     What the project does
@@ -19,7 +17,6 @@ Website: cspears.site
         How to get in contact with you
 
 
-
 ## How to Run the App Locally ####################################################################################
 First, navigate to the folder `server` in a terminal. Then type in `node server.js` to host the server locally.
 
@@ -29,11 +26,6 @@ Once the installation is finished, click 'Go Live' on the `index.html`.
 
 A new window should popup with the app in the tab.
 
-
-# How to set up on server 
-index.html: Uncomment code for voice
-classes/Socket.js: Uncomment code for Socket.host 
-
 # install dependencies
 cd voice_chat
 npm i
@@ -41,3 +33,11 @@ npm i
 # Must have root access 
 pm2 start voice_chat/signaling-server.js 
 pm2 start server/secureserver.js
+
+
+
+
+
+## How to set up on server ########################################################################################
+index.html: Uncomment code for voice
+classes/Socket.js: Uncomment code for Socket.host 
