@@ -98,7 +98,7 @@ send their voice directly to each other using this connection. This architecture
 communication between users.
 
 #### Live Video Architecture 
-![alt text](images/readme/livevideo_archtiecture.PNG)
+![alt text](images/readme/livevideo_architecture.PNG)
 
 We enabled a live interactive stream of a youtube video with CSS3DRenderer.js and CSS3DObject.js. We first create an
 iframe that holds the youtube video and inject it into the game.html code. We then append this iframe into the virtual 
