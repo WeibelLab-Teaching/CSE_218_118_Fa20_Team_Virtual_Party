@@ -133,17 +133,17 @@ environment and render it inside the virtual world created in the `world.js` fil
 
 ## Contributors
 Virtual Party was created at UC San Diego by Team Virtual Party. Our team consists of:
-- **Curtis Spears** (Backend & Networking):  &nbsp; BS CS Student at UC San Diego
-- **Caiting Wu** (Gameplay Programmer): &nbsp;  MS CS Student at UC San Diego
-- **Haotian Qiu** (Gameplay Programmer):  &nbsp;  MS CS Student at UC San Diego
-- **Haozhe Luo** (Graphics):    &nbsp;  MS CS Student at UC San Diego
+- **Curtis Spears** (Backend & Networking): BS CS Student at UC San Diego
+- **Caiting Wu** (Gameplay Programmer): MS CS Student at UC San Diego
+- **Haotian Qiu** (Gameplay Programmer): MS CS Student at UC San Diego
+- **Haozhe Luo** (Graphics): MS CS Student at UC San Diego
 
 ### Helps
 If you have any questions regarding Virtual Party, please email any one of our team members.
-- Curtis Spears:  &nbsp; cspears@ucsd.edu
-- Caiting Wu: &nbsp;  c1wu@eng.ucsd.edu
-- Haotian Qiu:  &nbsp; h1qiu@ucsd.edu
-- Haozhe Luo:    &nbsp;  h2luo@ucsd.edu   
+- Curtis Spears: cspears@ucsd.edu
+- Caiting Wu: c1wu@eng.ucsd.edu
+- Haotian Qiu: h1qiu@ucsd.edu
+- Haozhe Luo: h2luo@ucsd.edu   
 
 ## Resources
 - [Forum threads on streaming YouTube Videos in BabylonJS](https://forum.babylonjs.com/t/youtube-videos-on-a-mesh-port-of-css3drenderer-js/10600)
