@@ -52,7 +52,7 @@ A new window should popup with the app in the tab.
 
 
 
-## How to set up on server 
+## How to Set Up on Server 
 index.html: Uncomment code for voice
 classes/Socket.js: Uncomment code for Socket.host 
 
