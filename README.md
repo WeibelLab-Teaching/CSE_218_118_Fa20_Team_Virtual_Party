@@ -11,7 +11,7 @@ Lastest Branch is hosted live at [cspears.site](https://cspears.site/)
 ### How to Set Up on Your Own Server
 index.html: Uncomment code for voice
 
-classes/Socket.js: Uncomment code for Socket.host, change host name to your domain
+classes/Socket.js: Uncomment code for Socket.host 
 
 #### Install dependencies
 ```
@@ -40,12 +40,22 @@ However, there is need for social app that offers a laid back and immersive expe
 - **Gather.Town:** lacks of immersive 3D experience and open lobbies
 - **Mozilla Hubs:** scenes are less realistic, online video streaming works doesn't work as anticipated
 
-Many current real-time communication apps rely on open-camera to improve the overall immersive experience that the user could have. However, facing a open-camera could add a level of stress to certain users which will lead them to give up the opportunity to socialize. Besides, many similar services in the market cannot run on a mobile platform without installing a dedicated mobile app.
+Many current real-time communication apps rely on open-camera to improve the overall immersive experience that the user could have. However, facing a open-camera could add a level of stress to certain users which will lead them to give up the opportunity to socilize. Besides, many similar services in the market cannot run on mobile platform without installing a dedicated phone app.
 
 ## What Does The Project do?
 
 ### Storyboard
+We realized that most users who value virtual communications care about two main features the most:
+- Immersive communication
+- Laid-back experience
 
+Before our team consolidated the project direction, we used the following two storyboards to help us navigate through the entire process of project design.
+
+<img src="images/readme/storyboard_1.png">
+This storyboard outlines a concern that certain users share: they are afriad of using the communication apps on the market because their interaction requires them to keep the camera open to facilitate. This requirement makes some of the users feel uncomfortable. To resolve such issue, we planned to create an app that could offer, at least, an interactive experience that is on par with the current solutions. We came to the decision that we would build a realistic VR environment added with interactive actvities.  
+
+<img src="images/readme/storyboard_2.png">
+This storyboard showcases the common need that most users share: to feel being "there." Besides, most users want to have a laid-back experience. In order to resolve the needs, we decided to implement the application with real-time voice chat and open lobby that everyone could join. We also decided to implement online/offline video watching functionality to provide interactions.
 
 ### List of Features
 
@@ -114,14 +124,14 @@ environment and render it inside the virtual world created in the `world.js` fil
 
 ## Contributors
 Virtual Party was created at UC San Diego by Team Virtual Party. Our team consists of:
-</br>
+- **Curtis Spears** (Backend & Networking):  &nbsp; BS CS Student at UC San Diego
+- **Caiting Wu** (Gameplay Programmer): &nbsp;  MS CS Student at UC San Diego
+- **Haotian Qiu** (Gameplay Programmer):  &nbsp;  MS CS Student at UC San Diego
+- **Haozhe Luo** (Graphics):    &nbsp;  MS CS Student at UC San Diego
 
-Curtis Spears (Backend & Networking):  &nbsp; cspears@ucsd.edu
-
-Caiting Wu (Gameplay Programmer): &nbsp;  c1wu@eng.ucsd.edu
-
-Haotian Qiu (Gameplay Programmer):  &nbsp;  h1qiu@ucsd.edu
-
-Haozhe Luo (Graphics):    &nbsp;  h2luo@ucsd.edu   
-</br>
+### Helps
 If you have any questions regarding Virtual Party, please email any one of our team members.
+- Curtis Spears:  &nbsp; cspears@ucsd.edu
+- Caiting Wu: &nbsp;  c1wu@eng.ucsd.edu
+- Haotian Qiu:  &nbsp; h1qiu@ucsd.edu
+- Haozhe Luo:    &nbsp;  h2luo@ucsd.edu   
