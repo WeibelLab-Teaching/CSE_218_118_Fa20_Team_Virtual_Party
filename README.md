@@ -61,7 +61,7 @@ We realized that most users who value virtual communications care about two main
 Before our team consolidated the project direction, we used the following two storyboards to help us navigate through the entire process of project design.
 
 <img src="images/readme/storyboard_1.png">
-This storyboard outlines a concern that certain users share: they are afriad of using the communication apps on the market because their interaction requires them to keep the camera open to facilitate. This requirement makes some of the users feel uncomfortable. To resolve such issue, we planned to create an app that could offer, at least, an interactive experience that is on par with the current solutions. We came to the decision that we would build a realistic VR environment added with interactive activities.  
+This storyboard outlines a concern that certain users share: they are afraid of using the communication apps on the market because their interaction requires them to keep the camera open to facilitate. This requirement makes some of the users feel uncomfortable. To resolve such issue, we planned to create an app that could offer, at least, an interactive experience that is on par with the current solutions. We came to the decision that we would build a realistic VR environment added with interactive activities.  
 
 </br>
 </br>
