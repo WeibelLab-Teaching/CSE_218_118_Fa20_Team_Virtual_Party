@@ -107,13 +107,13 @@ environment and render it inside the virtual world created in the `world.js` fil
 ## Contributors
 Virtual Party was created at UC San Diego by Team Virtual Party. Our team consists of:
 </br>
-Caiting Wu: &nbsp; &nbsp; c1wu@eng.ucsd.edu
+Curtis Spears(Backend & Networking):  &nbsp; cspears@ucsd.edu
 
-Curtis Spears:  &nbsp; &nbsp; cspears@ucsd.edu
+Caiting Wu (Gameplay Programmer): &nbsp; &nbsp; c1wu@eng.ucsd.edu
 
-Haotian Qiu:  &nbsp; &nbsp;   h1qiu@ucsd.edu
+Haotian Qiu (Gameplay Programmer):  &nbsp; &nbsp;   h1qiu@ucsd.edu
 
-Haozhe Luo:    &nbsp; &nbsp;  h2luo@ucsd.edu   
+Haozhe Luo (Graphics):    &nbsp; &nbsp;  h2luo@ucsd.edu   
 </br>
 If you have any questions regarding Virtual Party, please email any one of our team members.
 
