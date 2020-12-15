@@ -17,8 +17,8 @@ Enter Project Description Here
 
 ### Architectures
 #### Project Architecture
-[index.html]                      homepage for application
-index.css                       homepage style sheer
+[index.html](index.html)                      homepage for application
+index.css                       homepauge style sheer
 
 
 /images/                        contains images used in index.html homepage or in README.md
