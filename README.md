@@ -1,8 +1,34 @@
 # Virtual Party
-Enter Project Description Here
+<img src="images/readme/virtual_party_logo.png" width="250" height="250" align="right">
+
+*Tired of being along by yourself? Fear of going out but still want to connect? Using camera all the times gives you anxiety?*  
+***Virtual Party*** *will help you!*
+
 ## How to Run?
 ### Online Version
+Lastest Branch is hosted live at [cspears.site](https://cspears.site/)
+### How to Set Up on Your Own Server
+index.html: Uncomment code for voice
+classes/Socket.js: Uncomment code for Socket.host 
+
+#### Install dependencies
+```
+cd voice_chat
+npm i
+```
+#### Must have root access
+```
+pm2 start voice_chat/signaling-server.js 
+pm2 start server/secureserver.js
+```
 ### Local Version
+1. Navigate to the folder `game/server` in a terminal  
+
+2. Type in `node server.js` to host the server locally  
+3. Then install the **Live Server** extention by *Ritwick Dey* in **VSCode**  
+4. Once the installation is finished, click **Go Live** on the `index.html`  
+5. A new window should popup with the app as a new tab in your preferred browser  
+6. You can always visit `localhost:5500` (the defaut port by the extention)  
 
 ## Why The Project is Useful?
 
@@ -16,41 +42,6 @@ Enter Project Description Here
 
 
 ### Architectures
-#### Project Architecture
-[index.html](index.html)                      homepage for application
-index.css                       homepauge style sheer
-
-
-/images/                        contains images used in index.html homepage or in README.md
-
-/game/                          contains all files related to the VP game application 
-
-/game/classes/                  contains all classes for objects created in the VP game application
-
-/game/classes/avatar.js         class for local avatar model and movement
-
-/game/classes/billboard.js      class for billboard displayed above player head
-
-/game/classes/input.js          class for reading player input
-
-/game/classes/player.js         class for online player models and movement
-
-/game/classes/socket.js         class for creating socket on client environment
-
-/game/classes/UI.js             class for inititializing events and sockets
-
-/game/classes/world.js          class for creating the virtual environment
-
-/game/CSS*                      classes for live video stream
-
-/game/assets/                   contains all models, player skins, videos, images used inside the VP app
-
-/game/server/server.js          socket server for hosting mulitplayer on local host or over http non-secure connection
-
-/game/server/secureserver.js    socket server for hosting multiplayer over secure HTTPS connection
-
-
-
 #### Multiplayer Architecture 
 ![alt text](images/readme/multiplayer_architecture.PNG)
 
