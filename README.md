@@ -1,8 +1,34 @@
 # Virtual Party
-Enter Project Description Here
+<img src="images/readme/virtual_party_logo.png" width="250" height="250" align="right">
+
+*Tired of being along by yourself? Fear of going out but still want to connect? Using camera all the times gives you anxiety?*  
+***Virtual Party*** *will help you!*
+
 ## How to Run?
 ### Online Version
+Lastest Branch is hosted live at [cspears.site](https://cspears.site/)
+### How to Set Up on Your Own Server
+index.html: Uncomment code for voice
+classes/Socket.js: Uncomment code for Socket.host 
+
+#### Install dependencies
+```
+cd voice_chat
+npm i
+```
+#### Must have root access
+```
+pm2 start voice_chat/signaling-server.js 
+pm2 start server/secureserver.js
+```
 ### Local Version
+1. Navigate to the folder `game/server` in a terminal  
+
+2. Type in `node server.js` to host the server locally  
+3. Then install the **Live Server** extention by *Ritwick Dey* in **VSCode**  
+4. Once the installation is finished, click **Go Live** on the `index.html`  
+5. A new window should popup with the app as a new tab in your preferred browser  
+6. You can always visit `localhost:5500` (the defaut port by the extention)  
 
 ## Why The Project is Useful?
 
