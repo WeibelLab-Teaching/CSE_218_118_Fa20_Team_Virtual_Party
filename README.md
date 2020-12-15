@@ -40,7 +40,8 @@ pm2 start server/secureserver.js
 
 ### List of Features
 
-<img src="images/readme/features.png">
+<img src="images/readme/features1.png">
+<img src="images/readme/features2.png">
 
 
 ### Architectures
