@@ -16,6 +16,31 @@ Enter Project Description Here
 
 
 ### Architectures
+#### Project Architecture
+index.html                      homepage for application
+index.css                       homepage style sheer
+
+/images/                        contains images used in index.html homepage or in README.md
+
+/game/                          contains all files related to the VP game application 
+
+/game/classes/                  contains all classes for objects created in the VP game application
+/game/classes/avatar.js         class for local avatar model and movement
+/game/classes/billboard.js      class for billboard displayed above player head
+/game/classes/input.js          class for reading player input
+/game/classes/player.js         class for online player models and movement
+/game/classes/socket.js         class for creating socket on client environment
+/game/classes/UI.js             class for inititializing events and sockets
+/game/classes/world.js          class for creating the virtual environment
+/game/CSS*                      classes for live video stream
+
+/game/assets/                   contains all models, player skins, videos, images used inside the VP app
+
+/game/server/server.js          socket server for hosting mulitplayer on local host or over http non-secure connection
+/game/server/secureserver.js    socket server for hosting multiplayer over secure HTTPS connection
+
+
+
 #### Multiplayer Architecture 
 ![alt text](images/readme/multiplayer_architecture.PNG)
 
