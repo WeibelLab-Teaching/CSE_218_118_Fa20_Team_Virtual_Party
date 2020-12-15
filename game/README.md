@@ -26,7 +26,7 @@ Once the installation is finished, click 'Go Live' on the `index.html`.
 
 A new window should popup with the app in the tab.
 
-### install dependencies
+### Install dependencies
 cd voice_chat
 npm i
 
