@@ -33,8 +33,8 @@ The other players then update their state locally.
 
 We enabled voice chat using a WebRTC P2P connection. Clients first connect to a google STUN server to find
 their public IP. We are hosting a signaling server that establishes a network channel between users so they
-can create a peer to peer connection with each other. This architecture enables real-time voice chat between
-users.
+can create a peer to peer connection with each other. Players can then send their voice directly to each other
+using this connection. This architecture enables real-time voice chat between users.
 
 
 
