@@ -17,7 +17,7 @@ Enter Project Description Here
 
 ### Architectures
 #### Project Architecture
-[a relative link](index.html)                      homepage for application
+[index.html]                      homepage for application
 index.css                       homepage style sheer
 
 
