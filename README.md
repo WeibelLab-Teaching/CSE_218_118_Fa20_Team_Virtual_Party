@@ -10,6 +10,7 @@
 - [Why The Project is Useful?](#why-the-project-is-useful)
 - [What Does The Project do?](#what-does-the-project-do)
 - [Contributors](#contributors)
+- [Resources](#resources)
 
 ## How to Run?
 ### Online Version
@@ -143,3 +144,9 @@ If you have any questions regarding Virtual Party, please email any one of our t
 - Caiting Wu: &nbsp;  c1wu@eng.ucsd.edu
 - Haotian Qiu:  &nbsp; h1qiu@ucsd.edu
 - Haozhe Luo:    &nbsp;  h2luo@ucsd.edu   
+
+## Resources
+- [Forum threads on streaming YouTube Videos in BabylonJS](https://forum.babylonjs.com/t/youtube-videos-on-a-mesh-port-of-css3drenderer-js/10600)
+- [Forum threads on possibility of avoid VR crashing under online video streaming enabled](https://forum.babylonjs.com/t/youtube-playback-using-css3drenderer-js-breaks-upon-entering-vr/16521)
+- [Playground example on imported GLTF file textures](https://playground.babylonjs.com/#0ABNPK#13)
+- [Playground example on shadow casting](https://www.babylonjs-playground.com/#1XVEKZ#25)
