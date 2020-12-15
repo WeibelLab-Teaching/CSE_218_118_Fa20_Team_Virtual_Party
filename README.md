@@ -23,7 +23,6 @@ index.css                       homepage style sheer
 
 /images/                        contains images used in index.html homepage or in README.md
 
-##### Game
 /game/                          contains all files related to the VP game application 
 
 /game/classes/                  contains all classes for objects created in the VP game application
