@@ -41,7 +41,7 @@ pm2 start server/secureserver.js
 
 
 
-### Architectures
+### Architecture
 #### Project Architecture
 [index.html](index.html)                                            homepage for application
 
