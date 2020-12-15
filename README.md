@@ -37,8 +37,9 @@ can create a peer to peer connection with each other. Players can then send thei
 using this connection. This architecture enables real-time voice chat between users.
 
 
+# Setup
 
-## How to Run the App Locally ####################################################################################
+## How to Run the App Locally 
 First, navigate to the folder `game/server` in a terminal. Then type in `node server.js` to host the server locally.
 
 Then install the **Live Server** extention by Ritwick Dey in VSCode.
@@ -51,7 +52,7 @@ A new window should popup with the app in the tab.
 
 
 
-## How to set up on server ########################################################################################
+## How to set up on server 
 index.html: Uncomment code for voice
 classes/Socket.js: Uncomment code for Socket.host 
 
