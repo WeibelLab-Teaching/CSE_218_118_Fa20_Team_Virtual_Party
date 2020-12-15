@@ -3,9 +3,9 @@
 /* global BABYLON */
 
 class World {
+
     static init() {
         World.canvas = document.getElementById("canvas");
-
         // Initialize the main engine
         World.engine = new BABYLON.Engine(World.canvas, true);
         MediaStreamTrackEvent
@@ -48,6 +48,7 @@ class World {
         World.setupVR();
         World.setupLocalVid();
 
+        // render
         World.engine.runRenderLoop(() => {
             World.scene.render();
             Avatar.update();
@@ -89,10 +90,12 @@ class World {
             else {
                 World.isSelectingMarker = false;
                 World.selectedMarker = false;
-                World.selected_mesh.material.diffuseColor = BABYLON.Color3.Green();
-                World.selected_mesh.scaling.x = 1;
-                World.selected_mesh.scaling.y = 1;
-                World.selected_mesh.scaling.z = 1;
+                if(World.selected_mesh) {
+                    World.selected_mesh.material.diffuseColor = BABYLON.Color3.Green();
+                    World.selected_mesh.scaling.x = 1;
+                    World.selected_mesh.scaling.y = 1;
+                    World.selected_mesh.scaling.z = 1;
+                }
             }   
             });
 
