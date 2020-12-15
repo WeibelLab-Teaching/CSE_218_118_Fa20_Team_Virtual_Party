@@ -43,42 +43,36 @@ pm2 start server/secureserver.js
 <img src="images/readme/features.PNG">
 
 
-### Architecture
+### Architectures
+In this section, we are going to introduce the architectures of our application from 3 perspectives:
+- Multiplayer Architecture
+- Project Architecture
+- Voice Chat Architecture
+
 #### Project Architecture
-[index.html](index.html)                                            homepage for application
+In the root, we have:
+- [index.html](index.html)                                            homepage for application
+- [index.css](index.css)                                              homepage style sheet  
 
-[index.css](index.css)                                              homepage style sheet
+The two main folders:
+- [/images/](/images/)                                                contains images used in `index.html` homepage or in `README.md`
+- [/game/](/game/)                                                    contains all files related to the VP game application
 
+The `/game/` folder is what the game made up of:
+1. [/game/classes/]([/game/classes/]) contains all classes for objects created in the Virtual Party game application
+    * [/game/classes/avatar.js](/game/classes/avatar.js)                  class for local avatar model and movement
+    * [/game/classes/billboard.js](/game/classes/billboard.js)            class for billboard displayed above player head
+    * [/game/classes/input.js](/game/classes/input.js)                    class for reading player input
+    * [/game/classes/player.js](/game/classes/player.js)                  class for online player models and movement
+    * [/game/classes/socket.js](/game/classes/socket.js)                  class for creating socket on client environment
+    * [/game/classes/UI.js](/game/classes/UI.js)                          class for inititializing events and sockets
+    * [/game/classes/world.js](/game/classes/world.js)                    class for creating the virtual environment
+    * [/game/classes/CSS3DObject.js](/game/CSS/CSS3DObject.js)            class for live video stream rendering (Provided by *ozRocker* at [here](https://forum.babylonjs.com/t/youtube-videos-on-a-mesh-port-of-css3drenderer-js/10600))
+    * [/game/classes/CSS3DRenderer.js](/game/CSS/CSS3DRenderer.js)            class for live video stream rendering(Provided by *ozRocker* at [here](https://forum.babylonjs.com/t/youtube-videos-on-a-mesh-port-of-css3drenderer-js/10600))
 
-[/images/](/images/)                                                contains images used in index.html homepage or in README.md
-
-[/game/](/game/)                                                    contains all files related to the VP game application 
-
-[/game/classes/]([/game/classes/])                                  contains all classes for objects created in the VP game application
-
-[/game/classes/avatar.js](/game/classes/avatar.js)                  class for local avatar model and movement
-
-[/game/classes/billboard.js](/game/classes/billboard.js)            class for billboard displayed above player head
-
-[/game/classes/input.js](/game/classes/input.js)                    class for reading player input
-
-[/game/classes/player.js](/game/classes/player.js)                  class for online player models and movement
-
-[/game/classes/socket.js](/game/classes/socket.js)                  class for creating socket on client environment
-
-[/game/classes/UI.js](/game/classes/UI.js)                          class for inititializing events and sockets
-
-[/game/classes/world.js](/game/classes/world.js)                    class for creating the virtual environment
-
-[/game/classes/CSS3DObject.js](/game/CSS/CSS3DObject.js)            class for live video stream rendering
-
-[/game/classes/CSS3DRenderer.js](/game/CSS/CSS3DRenderer.js)            class for live video stream rendering
-
-[/game/assets/ ](/game/assets/)                                     contains all models, player skins, videos, images used inside the VP app
-
-[/game/server/server.js](/game/server/server.js)                    socket server for hosting mulitplayer on local host or over http non-secure connection
-
-[/game/server/secureserver.js](/game/server/secureserver.js)        socket server for hosting multiplayer over secure HTTPS connection
+2. [/game/assets/ ](/game/assets/)                                     contains all models, player skins, videos, images used inside the Virtual Party app
+    - [/game/server/server.js](/game/server/server.js)                    socket server for hosting mulitplayer on local host or over HTTP non-secure connection
+    - [/game/server/secureserver.js](/game/server/secureserver.js)        socket server for hosting multiplayer over secure HTTPS connection
 
 
 
