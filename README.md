@@ -120,9 +120,9 @@ Curtis Spears(Backend & Networking):  &nbsp; cspears@ucsd.edu
 
 Caiting Wu (Gameplay Programmer): &nbsp; &nbsp; c1wu@eng.ucsd.edu
 
-Haotian Qiu (Gameplay Programmer):  &nbsp; &nbsp;   h1qiu@ucsd.edu
+Haotian Qiu (Gameplay Programmer):  &nbsp; &nbsp;  h1qiu@ucsd.edu
 
-Haozhe Luo (Graphics):    &nbsp; &nbsp;  h2luo@ucsd.edu   
+Haozhe Luo (Graphics):    &nbsp; &nbsp; &nbsp;&nbsp; h2luo@ucsd.edu   
 </br>
 If you have any questions regarding Virtual Party, please email any one of our team members.
 
