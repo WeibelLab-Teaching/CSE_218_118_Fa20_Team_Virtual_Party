@@ -46,9 +46,9 @@ pm2 start server/secureserver.js
 
 ### Architectures
 In this section, we are going to introduce the architectures of our application from 3 perspectives:
-- Multiplayer Architecture
-- Project Architecture
-- Voice Chat Architecture
+- [Multiplayer Architecture](#multiplayer-architecture)
+- [Project Architecture](#project-architecture)
+- [Voice Chat Architecture](#voice-chat-architecture)
 
 #### Project Architecture
 In the root, we have:
@@ -97,7 +97,7 @@ communication between users.
 #### Live Video Architecture 
 ![alt text](images/readme/livevideo_architecture.PNG)
 
-We enabled a live interactive stream of a youtube video with CSS3DRenderer.js and CSS3DObject.js. We first create an
+We enabled a live interactive stream of a youtube video with `CSS3DRenderer.js` and `CSS3DObject.js`. We first create an
 iframe that holds the youtube video and inject it into the game.html code. We then append this iframe into the virtual 
 environment and render it inside the virtual world created in the world.js file. 
 
