@@ -18,6 +18,7 @@ Website: cspears.site
 
 
 
+![alt text](images/readme/multiplayer_architecture.PNG)
 
 
 ## How to Run the App Locally ####################################################################################
