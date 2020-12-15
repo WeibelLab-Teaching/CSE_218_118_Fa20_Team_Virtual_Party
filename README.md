@@ -18,7 +18,19 @@ Website: cspears.site
 
 
 
+![alt text](images/readme/voicechat_architecture.PNG)
+
+We enabled voice chat using a WebRTC P2P connection. Clients first connect to a google STUN server to find
+their public IP. We are hosting a signaling server that establishes a network channel between users so they
+can create a peer to peer connection with each other. This architecture enables real-time voice chat between
+users.
+
 ![alt text](images/readme/multiplayer_architecture.PNG)
+
+We enabled multiplayer by running a Websocket server. Each player creates a socket node. We update local state changes 
+from /game/classes/avatar.js and send this information over the socket connection. So if you move your avatar, this 
+information will be sent to the socket server. The socket server then sends the state change to all other connected sockets / players.
+The other players then update their state locally.
 
 
 ## How to Run the App Locally ####################################################################################
