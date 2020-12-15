@@ -33,9 +33,17 @@ pm2 start server/secureserver.js
 6. You can always visit `localhost:5500` (the defaut port by the extention)  
 
 ## Why The Project is Useful?
+Since the begining of the lockdown due to COVID-19, the majority of people started to moving away from face-to-face interactions to virtual communications.
 
+However, there is need for social app that offers a laid back and immersive experience. Looking at the current social/real-time communication apps have their downsides:
+- **Zoom:** offers a very formal setting, has no open lobbies, and almost no interactions/entertainment offered
+- **Gather.Town:** lacks of immersive 3D experience and open lobbies
+- **Mozilla Hubs:** scenes are less realistic, online video streaming works doesn't work as anticipated
+
+Many current real-time communication apps rely on open-camera to improve the overall immersive experience that the user could have. However, facing a open-camera could add a level of stress to certain users which will lead them to give up the opportunity to socilize. Besides, many similar services in the market cannot run on mobile platform without installing a dedicated phone app.
 
 ## What Does The Project do?
+
 ### Storyboard
 
 
@@ -105,16 +113,6 @@ environment and render it inside the virtual world created in the `world.js` fil
 
 
 ## Contributors
-Virtual Party was created at UC San Diego by Team Virtual Party. Our team consists of:
-</br>
-Caiting Wu: &nbsp; &nbsp; c1wu@eng.ucsd.edu
 
-Curtis Spears:  &nbsp; &nbsp; cspears@ucsd.edu
-
-Haotian Qiu:  &nbsp; &nbsp;   h1qiu@ucsd.edu
-
-Haozhe Luo:    &nbsp; &nbsp;  h2luo@ucsd.edu   
-</br>
-If you have any questions regarding Virtual Party, please email any one of our team members.
 
 ### Helps
