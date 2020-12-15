@@ -15,9 +15,11 @@
 ### Online Version
 Lastest Branch is hosted live at [cspears.site](https://cspears.site/)
 ### How to Set Up on Your Own Server
-index.html: Uncomment code for voice
+After cloning this repository, you need to make changes on two files:
+- `index.html`: Uncomment code for voice
+- `classes/Socket.js`: Uncomment code for Socket.host 
 
-classes/Socket.js: Uncomment code for Socket.host 
+Then, proceed with following steps.
 
 #### Install dependencies
 ```
@@ -104,7 +106,7 @@ The `/game/` folder is what the game made up of:
 
 
 #### Multiplayer Architecture 
-![alt text](images/readme/multiplayer_architecture.PNG)
+<img src="images/readme/multiplayer_architecture.PNG">
 
 We enabled multiplayer by running a websocket server. Each player creates a socket node. We update local state changes 
 from `/game/classes/avatar.js` and send this information over the socket connection in `/game/classes/socket.js`. 
@@ -112,7 +114,7 @@ So if you move your avatar, this information will be sent to the socket server. 
 change to all other connected sockets / players. The other players then update their state locally.
 
 #### Voice Chat Architecture
-![alt text](images/readme/voicechat_architecture.PNG)
+<img src="images/readme/voicechat_architecture.PNG">
 
 We enabled voice chat using a **WebRTC P2P** connection. Clients first connect to a Google **STUN** server to find
 their public IP. We are hosting a signaling server that establishes a network channel between users so they
@@ -121,7 +123,7 @@ send their voice directly to each other using this connection. This architecture
 communication between users.
 
 #### Live Video Architecture 
-![alt text](images/readme/livevideo_architecture.PNG)
+<img src="images/readme/livevideo_architecture.PNG">
 
 We enabled a live interactive stream of a YouTube video with `CSS3DRenderer.js` and `CSS3DObject.js`. We first create an
 **iFrame** that holds the YouTube video and inject it into the `game.html` code. We then append this iFrame into the virtual 
