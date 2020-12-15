@@ -9,6 +9,7 @@
 Lastest Branch is hosted live at [cspears.site](https://cspears.site/)
 ### How to Set Up on Your Own Server
 index.html: Uncomment code for voice
+
 classes/Socket.js: Uncomment code for Socket.host 
 
 #### Install dependencies
