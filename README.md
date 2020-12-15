@@ -5,6 +5,12 @@
 
 **Virtual Party** will help you!
 
+## Index
+- [How to Run](#how-to-run)
+- [Why The Project is Useful?](#why-the-project-is-useful)
+- [What Does The Project do?](#what-does-the-project-do)
+- [Contributors](#contributors)
+
 ## How to Run?
 ### Online Version
 Lastest Branch is hosted live at [cspears.site](https://cspears.site/)
