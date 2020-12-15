@@ -39,10 +39,10 @@ pm2 start server/secureserver.js
 3. Then install the **Live Server** extention by *Ritwick Dey* in **VSCode**  
 4. Once the installation is finished, click **Go Live** on the `index.html`  
 5. A new window should popup with the app as a new tab in your preferred browser  
-6. You can always visit `localhost:5500` (the defaut port by the extention)  
+6. You can always visit `localhost:5500` (the default port by the extension)  
 
 ## Why The Project is Useful?
-Since the begining of the lockdown due to COVID-19, the majority of people started to moving away from face-to-face interactions to virtual communications.
+Since the begining of the lockdown due to COVID-19, the majority of people started to moving away from face-to-face interactions to virtual communication.
 
 However, there is need for social app that offers a laid back and immersive experience. Looking at the current social/real-time communication apps have their downsides:
 - **Zoom:** offers a very formal setting, has no open lobbies, and almost no interactions/entertainment offered
@@ -61,7 +61,7 @@ We realized that most users who value virtual communications care about two main
 Before our team consolidated the project direction, we used the following two storyboards to help us navigate through the entire process of project design.
 
 <img src="images/readme/storyboard_1.png">
-This storyboard outlines a concern that certain users share: they are afriad of using the communication apps on the market because their interaction requires them to keep the camera open to facilitate. This requirement makes some of the users feel uncomfortable. To resolve such issue, we planned to create an app that could offer, at least, an interactive experience that is on par with the current solutions. We came to the decision that we would build a realistic VR environment added with interactive actvities.  
+This storyboard outlines a concern that certain users share: they are afriad of using the communication apps on the market because their interaction requires them to keep the camera open to facilitate. This requirement makes some of the users feel uncomfortable. To resolve such issue, we planned to create an app that could offer, at least, an interactive experience that is on par with the current solutions. We came to the decision that we would build a realistic VR environment added with interactive activities.  
 
 <img src="images/readme/storyboard_2.png">
 This storyboard showcases the common need that most users share: to feel being "there." Besides, most users want to have a laid-back experience. In order to resolve the needs, we decided to implement the application with real-time voice chat and open lobby that everyone could join. We also decided to implement online/offline video watching functionality to provide interactions.
