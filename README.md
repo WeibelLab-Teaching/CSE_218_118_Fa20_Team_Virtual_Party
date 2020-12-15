@@ -9,6 +9,7 @@
 Lastest Branch is hosted live at [cspears.site](https://cspears.site/)
 ### How to Set Up on Your Own Server
 index.html: Uncomment code for voice
+
 classes/Socket.js: Uncomment code for Socket.host 
 
 #### Install dependencies
@@ -39,6 +40,7 @@ pm2 start server/secureserver.js
 
 ### List of Features
 
+<img src="images/readme/features1.PNG">
 
 
 ### Architectures
@@ -90,6 +92,14 @@ their public IP. We are hosting a signaling server that establishes a network ch
 can create a peer to peer connection with each other in `/game/voice_chat/singaling-server.js`. Players can then 
 send their voice directly to each other using this connection. This architecture enables real-time voice 
 communication between users.
+
+#### Live Video Architecture 
+![alt text](images/readme/livevideo_architecture.PNG)
+
+We enabled a live interactive stream of a youtube video with CSS3DRenderer.js and CSS3DObject.js. We first create an
+iframe that holds the youtube video and inject it into the game.html code. We then append this iframe into the virtual 
+environment and render it inside the virtual world created in the world.js file. 
+
 
 ## Contributors
 
