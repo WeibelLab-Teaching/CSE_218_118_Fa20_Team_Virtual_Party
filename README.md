@@ -40,7 +40,7 @@ However, there is need for social app that offers a laid back and immersive expe
 - **Gather.Town:** lacks of immersive 3D experience and open lobbies
 - **Mozilla Hubs:** scenes are less realistic, online video streaming works doesn't work as anticipated
 
-Many current real-time communication apps rely on open-camera to improve the overall immersive experience that the user could have. However, facing a open-camera could add a level of stress to certain users which will lead them to give up the opportunity to socilize. Besides, many similar services in the market cannot run on mobile platform without installing a dedicated phone app.
+Many current real-time communication apps rely on open-camera to improve the overall immersive experience that the user could have. However, facing a open-camera could add a level of stress to certain users which will lead them to give up the opportunity to socialize. Besides, many similar services in the market cannot run on a mobile platform without installing a dedicated mobile app.
 
 ## What Does The Project do?
 
