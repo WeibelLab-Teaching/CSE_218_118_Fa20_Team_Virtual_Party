@@ -8,7 +8,6 @@ class Avatar {
     static init() {
         Avatar.mesh = BABYLON.MeshBuilder.CreateBox("avatar", {height: 0, width: 0, depth: 0}, World.scene);
         Avatar.mesh.position = BABYLON.Vector3.Zero();
-        Avatar.mesh.position.y = Avatar.height/2;
         Avatar.mesh.material = new BABYLON.StandardMaterial("matAvatar", World.scene);
         Avatar.mesh.material.diffuseColor = new BABYLON.Color3.Green();
     }   
@@ -38,25 +37,35 @@ class Avatar {
         if (Avatar.mesh !== null) {
             //Moving forward
             if (Input.key.up) {
-		var forward = new BABYLON.Vector3(Avatar.walkSpeed * Math.cos(Avatar.absoluteRotation), 0, Avatar.walkSpeed * Math.sin(Avatar.absoluteRotation));
-		Avatar.mesh.moveWithCollisions(forward);
-                Avatar.send();
+                var forward = new BABYLON.Vector3(Avatar.walkSpeed * Math.cos(Avatar.absoluteRotation), 0, Avatar.walkSpeed * Math.sin(Avatar.absoluteRotation));
+                Avatar.mesh.moveWithCollisions(forward);
             }
             //Moving backward
             else if (Input.key.down) {
                 var backward = new BABYLON.Vector3(-Avatar.walkSpeed * Math.cos(Avatar.absoluteRotation), 0, -Avatar.walkSpeed * Math.sin(Avatar.absoluteRotation));
                 Avatar.mesh.moveWithCollisions(backward);
-                        Avatar.send();
             }
             //Turning left
             if (Input.key.left) {
                 Avatar.rotate(false);
-                Avatar.send();
             //Turning right
             } else if (Input.key.right) {
                 Avatar.rotate(true);
-                Avatar.send();
             }
+            // detect wall collisions
+            if(Avatar.mesh.position.x > 245) {
+                Avatar.mesh.position.x = 245;
+            }
+            if(Avatar.mesh.position.z > 245) {
+                Avatar.mesh.position.z = 245;
+            }
+            if(Avatar.mesh.position.x < -245) {
+                Avatar.mesh.position.x = -245;
+            }
+            if(Avatar.mesh.position.z < -245) {
+                Avatar.mesh.position.z = -245;
+            }
+            Avatar.send();
         }
     }
 }

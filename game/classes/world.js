@@ -22,7 +22,7 @@ class World {
 
         // Finish setting up the virtual space
         World.setupCamera();
-        World.setupSkybox(hdrTexture);
+        World.skybox = World.setupSkybox(hdrTexture);
         World.setupGround();       
         var shadowGenerator = World.setupLights();
         
@@ -76,7 +76,7 @@ class World {
         }
 
         World.vrHelper = World.scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
-        // World.vrHelper.enableInteractions();
+        World.vrHelper.enableInteractions();
         World.vrHelper.updateGazeTrackerScale = true;
 
 
@@ -115,6 +115,18 @@ class World {
                 if (World.selectedMarker) {
                     World.selected_mesh.material.diffuseColor = BABYLON.Color3.Red();
                     // move avatar
+                    if ( World.selected_mesh.position.x > 245) {
+                        World.selected_mesh.position.x = 245;
+                    }
+                    if( World.selected_mesh.position.z > 245) {
+                        World.selected_mesh.position.z = 245;
+                    }
+                    if( World.selected_mesh.position.x < -245) {
+                        World.selected_mesh.position.x = -245;
+                    }
+                    if( World.selected_mesh.position.z < -245) {
+                        World.selected_mesh.position.z = -245;
+                    }
                     Avatar.mesh.position.x = World.selected_mesh.position.x;
                     Avatar.mesh.position.z = World.selected_mesh.position.z;
                     // adjust camera
@@ -152,7 +164,7 @@ class World {
         ANote0Video.position.z = 0;
         ANote0Video.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
         var ANote0VideoMat = new BABYLON.StandardMaterial("m", World.scene);
-        var ANote0VideoVidTex = new BABYLON.VideoTexture("vidtex","assets/nfl_highlights.mp4", World.scene);
+        var ANote0VideoVidTex = new BABYLON.VideoTexture("vidtex","assets/videos/nfl_highlights.mp4", World.scene);
         ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
         ANote0VideoMat.roughness = 1;
         ANote0VideoMat.emissiveColor = new BABYLON.Color3.White();
@@ -220,6 +232,7 @@ class World {
     static setupSkybox(hdrTexture) {
         var skybox = BABYLON.Mesh.CreateBox("SkyBox", 500.0, World.scene);
         var skyboxMaterial = new BABYLON.PBRMaterial("skyBox", World.scene);
+        skybox.position = new BABYLON.Vector3(0, 35, 0);
         skyboxMaterial.backFaceCulling = false;
         skyboxMaterial.reflectionTexture = hdrTexture.clone();
         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
@@ -228,6 +241,7 @@ class World {
         // skybox.infiniteDistance = true;
         skybox.material = skyboxMaterial;
         skybox.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
+        return skybox
     }
     
     static setupLights() {   
@@ -236,7 +250,7 @@ class World {
         // var light = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(-1, 1, -1), new BABYLON.Vector3(0, -1, 0), Math.PI / 2, 10, World.scene);
         light.position = new BABYLON.Vector3(250, 100, 250);
         light.shadowOrthoScale = 0.2; 
-        light.intensity = 1.2;  
+        light.intensity = 1;  
         light.diffuse = new BABYLON.Color3(0.95, 0.85, 0.71, 0.43);
 
         var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
@@ -358,6 +372,7 @@ class World {
             var lookAt = new BABYLON.Vector3(Avatar.mesh.position.x, Avatar.mesh.position.y + Avatar.height, Avatar.mesh.position.z);
             World.camera.setTarget(lookAt);
 
+            
             World.vrHelper.position.x = Avatar.mesh.position.x;
             World.vrHelper.position.y = Avatar.mesh.position.y + Avatar.height;
             World.vrHelper.position.z = Avatar.mesh.position.z;
