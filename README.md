@@ -64,6 +64,7 @@ Before our team consolidated the project direction, we used the following two st
 This storyboard outlines a concern that certain users share: they are afriad of using the communication apps on the market because their interaction requires them to keep the camera open to facilitate. This requirement makes some of the users feel uncomfortable. To resolve such issue, we planned to create an app that could offer, at least, an interactive experience that is on par with the current solutions. We came to the decision that we would build a realistic VR environment added with interactive activities.  
 
 </br>
+</br>
 
 <img src="images/readme/storyboard_2.png">
 This storyboard showcases the common need that most users share: to feel being "there." Besides, most users want to have a laid-back experience. In order to resolve the needs, we decided to implement the application with real-time voice chat and open lobby that everyone could join. We also decided to implement online/offline video watching functionality to provide interactions.
