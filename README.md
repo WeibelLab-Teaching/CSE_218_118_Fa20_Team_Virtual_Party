@@ -69,6 +69,7 @@ pm2 start server/secureserver.js
 [/game/classes/world.js](/game/classes/world.js)                    class for creating the virtual environment
 
 [/game/classes/CSS3DObject.js](/game/CSS/CSS3DObject.js)            class for live video stream rendering
+
 [/game/classes/CSS3DRenderer.js](/game/CSS/CSS3DRenderer.js)            class for live video stream rendering
 
 [/game/assets/ ](/game/assets/)                                     contains all models, player skins, videos, images used inside the VP app
