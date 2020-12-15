@@ -17,37 +17,38 @@ Enter Project Description Here
 
 ### Architectures
 #### Project Architecture
-[index.html](index.html)                      homepage for application
-index.css                       homepauge style sheer
+[index.html](index.html)                                            homepage for application
+
+[index.css](index.css)                                              homepage style sheet
 
 
-/images/                        contains images used in index.html homepage or in README.md
+[/images/](/images/)                                                contains images used in index.html homepage or in README.md
 
-/game/                          contains all files related to the VP game application 
+[/game/](/game/)                                                    contains all files related to the VP game application 
 
-/game/classes/                  contains all classes for objects created in the VP game application
+[/game/classes/]([/game/classes/])                                  contains all classes for objects created in the VP game application
 
-/game/classes/avatar.js         class for local avatar model and movement
+[/game/classes/avatar.js](/game/classes/avatar.js)                  class for local avatar model and movement
 
-/game/classes/billboard.js      class for billboard displayed above player head
+[/game/classes/billboard.js](/game/classes/billboard.js)            class for billboard displayed above player head
 
-/game/classes/input.js          class for reading player input
+[/game/classes/input.js](/game/classes/input.js)                    class for reading player input
 
-/game/classes/player.js         class for online player models and movement
+[/game/classes/player.js](/game/classes/player.js)                  class for online player models and movement
 
-/game/classes/socket.js         class for creating socket on client environment
+[/game/classes/socket.js](/game/classes/socket.js)                  class for creating socket on client environment
 
-/game/classes/UI.js             class for inititializing events and sockets
+[/game/classes/UI.js](/game/classes/UI.js)                          class for inititializing events and sockets
 
-/game/classes/world.js          class for creating the virtual environment
+[/game/classes/world.js](/game/classes/world.js)                    class for creating the virtual environment
 
-/game/CSS*                      classes for live video stream
+[/game/CSS/CSS3DRenderer.js](/game/CSS/CSS3DRenderer.js)            class for live video stream rendering
 
-/game/assets/                   contains all models, player skins, videos, images used inside the VP app
+[/game/assets/ ](/game/assets/)                                     contains all models, player skins, videos, images used inside the VP app
 
-/game/server/server.js          socket server for hosting mulitplayer on local host or over http non-secure connection
+[/game/server/server.js](/game/server/server.js)                    socket server for hosting mulitplayer on local host or over http non-secure connection
 
-/game/server/secureserver.js    socket server for hosting multiplayer over secure HTTPS connection
+[/game/server/secureserver.js](/game/server/secureserver.js)        socket server for hosting multiplayer over secure HTTPS connection
 
 
 
