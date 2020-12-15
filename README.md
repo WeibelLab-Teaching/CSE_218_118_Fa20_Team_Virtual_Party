@@ -1,8 +1,9 @@
 # Virtual Party
 <img src="images/readme/virtual_party_logo.png" width="250" height="250" align="right">
 
-*Tired of being along by yourself? Fear of going out but still want to connect? Using camera all the times gives you anxiety?*  
-***Virtual Party*** *will help you!*
+> *Tired of being along by yourself? Fear of going out but still want to connect? Using camera all the times gives you anxiety?*  
+
+**Virtual Party** will help you!
 
 ## How to Run?
 ### Online Version
@@ -45,10 +46,11 @@ pm2 start server/secureserver.js
 
 
 ### Architectures
-In this section, we are going to introduce the architectures of our application from 3 perspectives:
-- [Multiplayer Architecture](#multiplayer-architecture)
+In this section, we are going to introduce the architectures of our application from 4 perspectives:
 - [Project Architecture](#project-architecture)
+- [Multiplayer Architecture](#multiplayer-architecture)
 - [Voice Chat Architecture](#voice-chat-architecture)
+- [Live Video Architecture](#live-video-architecture)
 
 #### Project Architecture
 In the root, we have:
@@ -97,9 +99,9 @@ communication between users.
 #### Live Video Architecture 
 ![alt text](images/readme/livevideo_architecture.PNG)
 
-We enabled a live interactive stream of a youtube video with `CSS3DRenderer.js` and `CSS3DObject.js`. We first create an
-iframe that holds the youtube video and inject it into the game.html code. We then append this iframe into the virtual 
-environment and render it inside the virtual world created in the world.js file. 
+We enabled a live interactive stream of a YouTube video with `CSS3DRenderer.js` and `CSS3DObject.js`. We first create an
+**iFrame** that holds the YouTube video and inject it into the `game.html` code. We then append this iFrame into the virtual 
+environment and render it inside the virtual world created in the `world.js` file. 
 
 
 ## Contributors
